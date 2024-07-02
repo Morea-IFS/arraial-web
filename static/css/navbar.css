@@ -1,0 +1,33 @@
+.nav {
+	background-color: #edd382;
+	height: 64px;
+	width: 100%;
+	padding: 8px 3rem;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	/*  */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.nav-cont-header {
+	position: relative;
+	font-size: 24px;
+	height: 100%;
+}
+
+.nav-cont-header img {
+	position: absolute;
+	width: 48px;
+	height: auto;
+	top: -10px;
+	left: -20px;
+}
+
+.nav-btn {
+	background-color: transparent;
+	outline: none;
+	width: 48px;
+	height: 48px;
+	cursor: pointer;
+}
