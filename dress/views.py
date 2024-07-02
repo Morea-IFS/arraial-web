@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import Dress, DressEffects
+from rest_framework.decorators import api_view
+from .serializers import DressSerializer
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -18,5 +21,8 @@ def index(request):
     
     return render(request, 'dashboard/dress.html', {'dressData': dressData, 'dressEffects': dressEffects})
 
+@api_view(['GET'])
 def getEffect(request, pk):
-    print(pk)
+    dress = Dress.objects.get(id=pk)
+    
+    return JsonResponse(DressSerializer(dress).data, safe=False)
