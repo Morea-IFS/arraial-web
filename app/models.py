@@ -27,8 +27,6 @@ class Device(models.Model):
     is_authorized = models.IntegerField(choices=AuthTypes.choices, default=AuthTypes.pending)
     mac_address = models.CharField(
         max_length=255, null=True, blank=True, unique=True)
-    section = models.CharField(max_length=255, null=True, blank=True)
-    location = models.CharField(max_length=255, null=True, blank=True)
     ip_address = models.GenericIPAddressField(
         max_length=255, null=True, blank=True)
     api_token = models.CharField(
