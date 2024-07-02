@@ -19,5 +19,6 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.index, name="Dress Manager"),
+    path('dashboard/', views.index, name="Dress Manager"),
+    path('api/getEffect/<int:pk>', views.getEffect, name="Get Effects"),
 ]

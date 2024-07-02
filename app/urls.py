@@ -21,6 +21,6 @@ from . import views
 urlpatterns = [
     path('', views.index, name="Home Page"),
     path('dashboard/', views.dashboard, name="Dashboard"),
+    path('dress/' ,include('dress.urls'), name="Dress Manager"),
     path('api/authenticate/', views.authenticateDevice, name="Authenticate IoT Device"),
-    path('dashboard/dress/' ,include('dress.urls'), name="Dress Manager")
 ]
