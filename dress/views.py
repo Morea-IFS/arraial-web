@@ -23,6 +23,6 @@ def index(request):
 
 @api_view(['GET'])
 def getEffect(request, pk):
-    dress = Dress.objects.get(id=pk)
+    dress = Dress.objects.select_related('device').get(device__id=pk)
     
     return JsonResponse(DressSerializer(dress).data, safe=False)

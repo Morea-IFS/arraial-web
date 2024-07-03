@@ -33,7 +33,7 @@ def authenticateDevice(request):
             device.api_token = str(apiToken)
             device.save()
 
-            return Response({'api_token': apiToken, 'deviceName': device.name}, status=status.HTTP_200_OK)
+            return Response({'api_token': apiToken, 'id': device.id, 'deviceName': device.name}, status=status.HTTP_200_OK)
         else:
             apiToken = uuid.uuid4()
 
@@ -42,5 +42,7 @@ def authenticateDevice(request):
                 newDevice.save()
             except:
                 return Response({'error': 'something went wrong.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            device = Device.objects.get(api_token=apiToken)
 
-            return Response({'api_token': apiToken}, status=status.HTTP_201_CREATED)
+            return Response({'api_token': apiToken, 'id': device.id}, status=status.HTTP_201_CREATED)

@@ -9,76 +9,59 @@
 {% block content %}
 <main class="container mt-5">
 	<h1>Gerenciamento de Vestidos</h1>
-	<div class="accordion">
-		{% for dress in dressData %}
-		<div class="accordion-item mt-4">
-			<h2 class="accordion-header">
-				<button
-					class="accordion-button collapsed"
-					type="button"
-					data-bs-toggle="collapse"
-					data-bs-target="#{{dress.device.id}}"
-					aria-expanded="false"
-					aria-controls="{{dress.device.id}}"
-				>
-					{{dress.device.name}}
-				</button>
-			</h2>
-			<div id="{{dress.device.id}}" class="accordion-collapse collapse">
-				<div class="accordion-body">
-					<form method="post" class="d-flex flex-column">
+
+	{% for dress in dressData %}
+	<div class="card mt-3 mb-2">
+		<div class="card-header">{{dress.device.name}}</div>
+		<div class="card-body">
+			<form method="post" class="d-flex flex-column" id="form">
+				{% csrf_token %}
+				<input
+					class="visually-hidden"
+					value="{{dress.device.id}}"
+					name="deviceId"
+					type="text"
+				/>
+				<div class="d-flex">
+					{% for effect in dressEffects %}
+					<!--  -->
+					{% if dress.effect == effect.0 %}
+					<div class="form-check px-4 py-2">
 						<input
-							class="visually-hidden"
-							value="{{dress.device.id}}"
-							name="deviceId"
-							type="text"
+							class="form-check-input"
+							type="radio"
+							name="effect"
+							value="{{effect.0}}"
+							id="{{effect.0}}"
+							checked
 						/>
-						{% csrf_token %}
-						<div class="d-flex flex-wrap">
-							{% for effect in dressEffects %}
-							<!--  -->
-							{% if dress.effect == effect.0 %}
-							<div class="form-check px-4 py-2">
-								<input
-									class="form-check-input"
-									type="radio"
-									name="effect"
-									value="{{effect.0}}"
-									id="{{effect.0}}"
-									checked
-								/>
-								<label class="form-check-label" for="{{effect.0}}">
-									{{effect.1}}
-								</label>
-							</div>
-							{% else %}
-							<div class="form-check px-4 py-2">
-								<input
-									class="form-check-input"
-									type="radio"
-									name="effect"
-									value="{{effect.0}}"
-									id="{{effect.0}}"
-								/>
-								<label class="form-check-label" for="{{effect.0}}">
-									{{effect.1}}
-								</label>
-							</div>
-							{% endif %}
-							<!--  -->
-							{% endfor %}
-						</div>
-						<button
-							type="submit"
-							class="btn btn-primary px-4 align-self-center"
-						>
-							Salvar
-						</button>
-					</form>
+						<label class="form-check-label" for="{{effect.0}}">
+							{{effect.1}}
+						</label>
+					</div>
+					{% else %}
+					<div class="form-check px-4 py-2">
+						<input
+							class="form-check-input"
+							type="radio"
+							name="effect"
+							value="{{effect.0}}"
+							id="{{effect.0}}"
+						/>
+						<label class="form-check-label" for="{{effect.0}}">
+							{{effect.1}}
+						</label>
+					</div>
+					{% endif %}
+					<!--  -->
+					{% endfor %}
 				</div>
-			</div>
+				<button type="submit" class="btn btn-primary px-4 align-self-center">
+					Salvar
+				</button>
+			</form>
 		</div>
-		{% endfor %}
 	</div>
+	{% endfor %}
 </main>
 {% endblock content %}
