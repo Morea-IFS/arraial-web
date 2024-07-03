@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'app',
-    'dress'
+    'dress',
+    'detonador'
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'arraial.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / 'app/templates', BASE_DIR / 'dress/templates' ],
+        'DIRS': [ BASE_DIR / 'app/templates', BASE_DIR / 'dress/templates', BASE_DIR / 'detonador/templates' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

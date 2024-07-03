@@ -4,6 +4,7 @@ app/migrations/__pycache__/
 
 morea_ds/__pycache__/
 dress/__pycache__/
+detonador/__pycache__/
 
 db.sqlite3
 

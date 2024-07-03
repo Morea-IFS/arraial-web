@@ -19,9 +19,6 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.index, name="Home Page"),
-    path('dashboard/', views.dashboard, name="Dashboard"),
-    path('dress/' ,include('dress.urls'), name="Dress Manager"),
-    path('detonador/', include('detonador.urls'), name="Detonador Manager"),
-    path('api/authenticate/', views.authenticateDevice, name="Authenticate IoT Device"),
+    path('dashboard/', views.index, name="Dress Manager"),
+    # path('api/getStatus/<int:pk>', views.getStatus, name="Get Effects"),
 ]
