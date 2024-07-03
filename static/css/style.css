@@ -135,7 +135,7 @@ a {
 /*Área inferior*/
 
 
-.footer-content{
+.footer-content {
     display: flex;
     justify-content: space-between;
     background-color: black;
@@ -143,7 +143,7 @@ a {
     user-select: none;
 }
 
-.footer-logo{
+.footer-logo {
     margin: 0 0 0 7rem;
 }
 
@@ -170,31 +170,31 @@ a {
     width: 115px;
 }
 
-.footer-realization{
+.footer-realization {
     margin: 3rem 0 0 0;
     width: 35rem;
 }
 
-.footer-title-realization{
+.footer-title-realization {
     font-family: 'well';
     color: white;
 }
 
-.footer-image-realization{
+.footer-image-realization {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
-.footer-image-item-realization{
+.footer-image-item-realization {
     height: 80px;
 }
 
-.footer-nav-list{
+.footer-nav-list {
     margin: 3rem 2rem 0 0;
 }
 
-.footer-nav-list ul{
+.footer-nav-list ul {
     display: flex;
     align-items: flex-end;
     flex-direction: column;
@@ -204,7 +204,7 @@ a {
     gap: 33px;
 }
 
-.footer-link-navbar{
+.footer-link-navbar {
     color: white;
 }
 
@@ -334,7 +334,8 @@ a {
 
     .all {
         flex-direction: column;
-        margin: 87px 6% 60% 10%;;
+        margin: 87px 6% 60% 10%;
+        ;
     }
 
     .couple {
@@ -346,8 +347,8 @@ a {
 
 @media (max-width: 768px) {
 
-    .footer-content{
-        display: flex ;
+    .footer-content {
+        display: flex;
         flex-direction: column;
     }
 }
