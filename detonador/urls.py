@@ -20,5 +20,5 @@ from . import views
 
 urlpatterns = [
     path('dashboard/', views.index, name="Dress Manager"),
-    # path('api/getStatus/<int:pk>', views.getStatus, name="Get Effects"),
+    path('api/getStatus/<int:pk>', views.getStatus, name="Get Effects"),
 ]

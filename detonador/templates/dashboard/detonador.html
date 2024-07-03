@@ -3,56 +3,54 @@
 <!--  -->
 
 {% block head %}
-<title>Detonador | Gerenciamento</title>
+<title>Vestidos | Gerenciamento</title>
 {% endblock head %}
 <!--  -->
 {% block content %}
 <main class="container mt-5">
 	<h1>Detonador</h1>
-	{% comment %}
-	<h1>Gerenciamento de Vestidos</h1>
-
-	{% for dress in dressData %}
+	{% regroup detonadorData by device.id as filteredDetonador %}
+	<!--  -->
+	{% for detonador in filteredDetonador %}
 	<div class="card mt-3 mb-2">
-		<div class="card-header">{{dress.device.name}}</div>
+		<div class="card-header">{{detonador.list.0.device.name}}</div>
 		<div class="card-body">
 			<form method="post" class="d-flex flex-column" id="form">
 				{% csrf_token %}
 				<input
 					class="visually-hidden"
-					value="{{dress.device.id}}"
+					value="{{detonador.list.0.device.id}}"
 					name="deviceId"
 					type="text"
 				/>
 				<div class="d-flex">
-					{% for effect in dressEffects %}
+					{% for det in detonador.list %}
 					<!--  -->
-					{% if dress.effect == effect.0 %}
+					{% if det.status %}
 					<div class="form-check px-4 py-2">
 						<input
+							name="{{det.id}}"
+							type="checkbox"
 							class="form-check-input"
-							type="radio"
-							name="effect"
-							value="{{effect.0}}"
-							id="{{effect.0}}"
+							id="{{det.id}}"
 							checked
 						/>
-						<label class="form-check-label" for="{{effect.0}}">
-							{{effect.1}}
-						</label>
+						<label class="form-check-label" for="{{det.id}}"
+							>D{{det.pin}}</label
+						>
 					</div>
 					{% else %}
+
 					<div class="form-check px-4 py-2">
 						<input
+							name="{{det.id}}"
+							type="checkbox"
 							class="form-check-input"
-							type="radio"
-							name="effect"
-							value="{{effect.0}}"
-							id="{{effect.0}}"
+							id="{{det.id}}"
 						/>
-						<label class="form-check-label" for="{{effect.0}}">
-							{{effect.1}}
-						</label>
+						<label class="form-check-label" for="{{det.id}}"
+							>D{{det.pin}}</label
+						>
 					</div>
 					{% endif %}
 					<!--  -->
@@ -64,6 +62,6 @@
 			</form>
 		</div>
 	</div>
-	{% endfor %} {% endcomment %}
+	{% endfor %}
 </main>
 {% endblock content %}

@@ -3,11 +3,13 @@ from .models import Dress, DressEffects
 from rest_framework.decorators import api_view
 from .serializers import DressSerializer
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required(login_url='/login')
 def index(request):
-    dressData = Dress.objects.select_related('device').filter(device__is_authorized= 2)
+    dressData = Dress.objects.select_related('device').filter(device__is_authorized= 2).filter(device__application=1)
     dressEffects = DressEffects.choices
     
     if request.method == 'POST':

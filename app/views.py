@@ -1,9 +1,13 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from rest_framework.decorators import api_view
 import json
 from rest_framework.response import Response
 from rest_framework import status
 import uuid
+from django.shortcuts import redirect
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as loginAuth
 from .models import Device
 
 
@@ -13,8 +17,33 @@ from .models import Device
 def index(request):
     return render(request, 'index.html')
 
+@login_required(login_url='/login')
 def dashboard(request):
     return render(request, 'dashboard/dashboard.html')
+
+def login(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        
+        print(email, password)
+
+        user = authenticate(request, email=email, password=password)
+        
+        print(user)
+
+        if user is not None:
+            loginAuth(request, user)
+
+            try:
+                return redirect("/dashboard")
+            except:
+                return redirect('/')
+        else:
+            return render(request, 'login.html', {'invalid': 'Usuário ou senha inválidos'})
+            
+
+    return render(request, 'login.html')
 
 # API
 

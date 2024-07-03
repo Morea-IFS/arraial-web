@@ -6,3 +6,4 @@ class DressSerializer(serializers.Serializer):
     
     class Meta:
         model = Dress
+        

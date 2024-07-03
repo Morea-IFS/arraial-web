@@ -23,5 +23,6 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name="Dashboard"),
     path('dress/' ,include('dress.urls'), name="Dress Manager"),
     path('detonador/', include('detonador.urls'), name="Detonador Manager"),
+    path('login/', views.login, name="Sign-in Page"),
     path('api/authenticate/', views.authenticateDevice, name="Authenticate IoT Device"),
 ]
