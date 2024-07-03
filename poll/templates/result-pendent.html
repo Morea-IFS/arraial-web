@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/result-pendent.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/poll/logo-morea.svg' %}">
+    <title>Resultados</title>
+</head>
+
+<body>
+    <header>
+        <nav class="container-navbar">
+            <div class="logo-navbar">
+                <a href="/">
+                    <img class="logo" src="{% static 'images/poll/logo-morea.svg' %}" alt="Logo Morea">
+                </a>
+                <div class="mobile-menu">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+            <div class="nav-list">
+                <ul>
+                    <a class="link-navbar" href="/">
+                        <li>Início</li>
+                    </a>
+                    <a class="link-navbar" href="/candidates">
+                        <li>Candidatos</li>
+                    </a>
+                    <a class="link-navbar" href="/result-pendent">
+                        <li>Resultados</li>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="center-items">
+            <div class="bonfire">
+                <video autoplay loop src="{% static 'animations/Animation - 1716985492807.webm' %}">Seu navegador não suportou</video>
+            </div>
+            <div class="div-title">
+                <p class="title">Aguardando os resultados...</p>
+                <p class="text">Será que os seus candidatos venceram? <br> fique de olho!</p>
+            </div>
+        </div>
+    </main>
+    <script src="{% static 'js/mobile-menu.js' %}"></script>
+</body>
+
+</html>
