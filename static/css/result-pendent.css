@@ -24,6 +24,7 @@
 
 body {
     overflow-x: hidden;
+    background-color: #d1d1b3;
 }
 
 a {
@@ -39,7 +40,7 @@ a {
     height: auto;
     position: fixed;
     border-bottom: solid 2px black;
-    background-color: white;
+    background-color: #d1d1b3;
     top: 0;
 }
 
@@ -307,7 +308,7 @@ a {
     .footer-hat {
         margin: 0 0 -55px -200px;
     }
-    
+
     .footer-realization {
         display: flex;
         justify-content: center;

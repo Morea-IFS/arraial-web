@@ -24,6 +24,7 @@
 
 body {
     overflow-x: hidden;
+    background-color: #d1d1b3;
 }
 
 a {
@@ -39,7 +40,7 @@ a {
     height: auto;
     position: fixed;
     border-bottom: solid 2px black;
-    background-color: white;
+    background-color: #d1d1b3;
     top: 0;
 }
 
@@ -124,7 +125,7 @@ a {
     align-items: center;
     height: 100%;
     width: 13em;
-    background-color: #d9d9d9;
+    background-color: white;
     border: solid black 2px;
     border-radius: 10px;
 }
@@ -152,7 +153,7 @@ a {
     margin: -40px 0 10px 0;
 }
 
-.div-musician{
+.div-musician {
     display: flex;
     justify-content: flex-end;
     margin: 6rem 0 0 0;
@@ -373,7 +374,7 @@ a {
     .footer-hat {
         margin: 0 0 -55px -200px;
     }
-    
+
     .footer-realization {
         display: flex;
         justify-content: center;
