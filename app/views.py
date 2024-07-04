@@ -10,12 +10,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as loginAuth
 from .models import Device
 
-
 # Create your views here.
-
-
-def index(request):
-    return render(request, 'index.html')
 
 @login_required(login_url='/login')
 def dashboard(request):

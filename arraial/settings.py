@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'app',
     'dress',
-    'detonador'
+    'detonador',
+    'poll'
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'arraial.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / 'app/templates', BASE_DIR / 'dress/templates', BASE_DIR / 'detonador/templates' ],
+        'DIRS': [ BASE_DIR / 'app/templates', BASE_DIR / 'dress/templates', BASE_DIR / 'detonador/templates', BASE_DIR / 'poll/templates' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -6,6 +6,8 @@ morea_ds/__pycache__/
 dress/__pycache__/
 detonador/__pycache__/
 
+poll/__pycache__/
+poll/migrations/__pycache__/
 db.sqlite3
 
 .env

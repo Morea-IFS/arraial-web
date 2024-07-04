@@ -19,10 +19,8 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', include('poll.urls'), name="Home Page"),
-    path('dashboard/', views.dashboard, name="Dashboard"),
-    path('dress/' ,include('dress.urls'), name="Dress Manager"),
-    path('detonador/', include('detonador.urls'), name="Detonador Manager"),
-    path('login/', views.login, name="Sign-in Page"),
-    path('api/authenticate/', views.authenticateDevice, name="Authenticate IoT Device"),
+    path('', views.index, name="Home Page"),
+    path('candidates/', views.candidates, name="Candidates Area"),
+    path('result-pendent/', views.resultpendent, name="result pendent"),
+    path('results/', views.results, name="results"),
 ]
