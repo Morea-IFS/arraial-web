@@ -103,7 +103,7 @@ a {
     font-size: 45px;
     color: white;
     background-color: black;
-    width: 135px;
+    width: 170px;
 }
 
 .text {
@@ -207,6 +207,7 @@ a {
 .footer-link-navbar {
     color: white;
 }
+
 
 @media (max-width: 460px) {
 
@@ -320,11 +321,11 @@ a {
 
     .title2 {
         font-size: 35px;
-        width: 115px;
+        width: 130px;
     }
 
     .text {
-        font-size: 16px;
+        font-size: 18px;
         margin-bottom: 25%;
     }
 
@@ -345,10 +346,49 @@ a {
 
 }
 
+
 @media (max-width: 768px) {
 
     .footer-content {
+        flex-direction: column;
+        padding: 0 0 6rem 0;
+    }
+
+    .footer-logo {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .footer-hat {
+        margin: 0 0 -55px -200px;
+    }
+    
+    .footer-realization {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .footer-image-realization {
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-top: 30px;
+    }
+
+    .footer-image-item-realization {
+        margin: 10px;
+    }
+
+    .footer-nav-list {
+        margin: 3rem 0 0 0;
+    }
+
+    .footer-nav-list ul {
+        align-items: center;
     }
 }

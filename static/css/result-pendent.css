@@ -105,6 +105,83 @@ a {
     font-size: 23px;
 }
 
+/*Área inferior*/
+
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    padding: 0 0 2rem 0;
+    user-select: none;
+}
+
+.footer-logo {
+    margin: 0 0 0 7rem;
+}
+
+.footer-hat {
+    height: 120px;
+    width: 120px;
+    margin: 0 0 -60px -75px;
+    filter: invert(1);
+}
+
+.footer-title {
+    display: flex;
+    font-family: 'adumu';
+    color: white;
+    font-size: 30px;
+    user-select: none;
+}
+
+.footer-title-2 {
+    font-family: 'well';
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    width: 115px;
+}
+
+.footer-realization {
+    margin: 3rem 0 0 0;
+    width: 35rem;
+}
+
+.footer-title-realization {
+    font-family: 'well';
+    color: white;
+}
+
+.footer-image-realization {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footer-image-item-realization {
+    height: 80px;
+}
+
+.footer-nav-list {
+    margin: 3rem 2rem 0 0;
+}
+
+.footer-nav-list ul {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    list-style: none;
+    font-family: 'well';
+    font-size: 20px;
+    gap: 33px;
+}
+
+.footer-link-navbar {
+    color: white;
+}
+
+
 @media (max-width: 460px) {
 
 
@@ -208,5 +285,52 @@ a {
 
     .text {
         font-size: 19px;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .footer-content {
+        flex-direction: column;
+        padding: 0 0 6rem 0;
+    }
+
+    .footer-logo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .footer-hat {
+        margin: 0 0 -55px -200px;
+    }
+    
+    .footer-realization {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .footer-image-realization {
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-top: 30px;
+    }
+
+    .footer-image-item-realization {
+        margin: 10px;
+    }
+
+    .footer-nav-list {
+        margin: 3rem 0 0 0;
+    }
+
+    .footer-nav-list ul {
+        align-items: center;
     }
 }
