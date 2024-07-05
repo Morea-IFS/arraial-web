@@ -23,6 +23,8 @@
 /*Área De navegação*/
 
 body {
+    position: relative;
+    min-height: 100vh;
     overflow-x: hidden;
     background-color: #d1d1b3;
 }
@@ -168,7 +170,15 @@ a {
 /*Área inferior*/
 
 
+.invisible-footer {
+    height: 20rem;
+    width: 100%;
+}
+
 .footer-content {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     background-color: black;
@@ -356,6 +366,10 @@ a {
 
 
 @media (max-width: 768px) {
+
+    .invisible-footer {
+        height: 45rem;
+    }
 
     .footer-content {
         display: flex;
