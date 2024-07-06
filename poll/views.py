@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from . models import Aluno, Voto
+from . models import Aluno, Candidato
 
 # Create your views here.
 
@@ -18,17 +18,19 @@ def results(request):
 
 def contabilizar_votos(request):
     matricula = request.GET.get('matricula')
-    numero_candidato = request.GET.get('numero_candidato')
+    numero_candidato = request.GET.get('numero_voto_candidato')
     if not matricula or not numero_candidato:
         return JsonResponse({'error':'Matricula e número do candidato são obrigatorios'}, status=400)
     try:
         aluno = Aluno.objects.get(matricula=matricula)
         if aluno.votou:
             return JsonResponse({'error':'aluno já votou'},status=400)
-        
-        Voto.objects.create(numero_candidato=numero_candidato)
-        aluno.votou =True
-        aluno.save()
+        candidato = Candidato.objects.get(numero_voto_candidato=numero_candidato)
+        Aluno.votou = True
+        Aluno.save()
+        Candidato.votos_candidato += 1
+        Candidato.save()
+
         return JsonResponse({'success':'Voto contabilizado com sucesso'},status=200)
     except Aluno.DoesNotExist:
         return JsonResponse({'error':'Matricula não encontrada'}, status=404)
