@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8$muq*%$w(p12zz@x$q9i%exj40=gh**bl&w6vivgh10z1k(*^'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG') == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
 
 
 # Application definition
@@ -79,12 +82,26 @@ WSGI_APPLICATION = 'arraial.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if (os.getenv("DBTYPE") == "MySQL") or (os.getenv("DBTYPE") == "mysql"):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.getenv("DBNAME"),
+            'USER': os.getenv("DBUSER"),
+            'PASSWORD': os.getenv("DBPASSWORD"),
+            # Or an IP Address that your DB is hosted on
+            'HOST': os.getenv("DBHOST"),
+            'PORT': os.getenv("DBPORT"),
+        }
     }
-}
+
+elif (os.getenv("DBTYPE") == "SQLite3") or (os.getenv("DBTYPE") == "sqlite3"):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR / 'db.sqlite3'),
+        }
+    }
 
 
 # Password validation
@@ -123,6 +140,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+if (os.getenv("ENVIRONMENT") == "DEV"):
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static/')
+    ]
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+elif (os.getenv("ENVIRONMENT") == 'PROD'):
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static/')
+    ]
+    MEDIA_ROOT = '/var/www/html/Morea/media/'
+    STATIC_ROOT = '/var/www/html/Morea/static'
+
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
@@ -130,7 +160,7 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-    
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
