@@ -25,54 +25,43 @@
             </div>
             <div class="nav-list">
                 <ul>
-                    <a class="link-navbar" href="index.html">
+                    <a class="link-navbar" href="/">
                         <li>Início</li>
                     </a>
-                    <a class="link-navbar" href="candidates.html">
+                    <a class="link-navbar" href="/candidates">
                         <li>Candidatos</li>
                     </a>
-                    <a class="link-navbar" href="results.html">
+                    <a class="link-navbar" href="/results">
                         <li>Resultados</li>
                     </a>
                 </ul>
             </div>
         </nav>
     </header>
-    <main></main>
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img class="footer-hat" src="{% static 'images/poll/chapeu.svg' %}" alt="chapéu">
-                <p class="footer-title">Rei e Rainha</p>
-                <br>
-                <p class="footer-title-2">RJ-45</p>
-            </div>
-            <div class="footer-realization">
-                <p class="footer-title-realization">Realization</p>
-                <div class="footer-image-realization">
-                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-morea.svg' %}"
-                        alt="Logo Morea">
-                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-coirc.svg' %}"
-                        alt="Logo Coirc">
-                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-ifs.png' %}"
-                        alt="Logo IFS">
+    <main class="container">
+        <div class="candidate">
+            <img class="crown" src="{% static 'images/poll/coroa.png' %}" alt="Coroa">
+            <div class="king-result">
+                <div class="bar">
+                    <p class="result-title">Aristeudes</p>
+                    <p class="result-title">37%</p>
+                    <div class="king-progress-bar" style="height: 37%"></div>
+                </div>
+                <div class="bar">
+                    <p class="result-title result-winner">Aristeudes</p>
+                    <p class="result-title result-winner">55%</p>
+                    <div class="king-progress-bar active" style="height: 55%"></div>
+                </div>
+                <div class="bar">
+                    <p class="result-title">Aristeudes</p>
+                    <p class="result-title">8%</p>
+                    <div class="king-progress-bar" style="height: 8%"></div>
                 </div>
             </div>
-            <div class="footer-nav-list">
-                <ul>
-                    <a class="footer-link-navbar" href="/">
-                        <li>Início</li>
-                    </a>
-                    <a class="footer-link-navbar" href="/candidates">
-                        <li>Candidatos</li>
-                    </a>
-                    <a class="footer-link-navbar" href="/result-pendent">
-                        <li>Resultados</li>
-                    </a>
-                </ul>
-            </div>
+            <p class="title">Rei</p>
         </div>
-    </footer>
+    </main>
+
     <script src="{% static 'js/mobile-menu.js' %}"></script>
 </body>
 

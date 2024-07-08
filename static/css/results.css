@@ -78,6 +78,72 @@ a {
 }
 
 
+/*Área De votação*/
+
+
+.container{
+    margin: 10rem 5rem 0 5rem;
+    user-select: none;
+}
+
+.candidate{
+    text-align: center;
+    width: 30%;
+    min-width: 16rem;
+}
+
+.crown{
+    height: 30px;
+    width: 30px;
+    margin-bottom: -2rem
+}
+
+
+
+.king-result{
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: solid black 2px;
+    margin: 0 0 1rem 0;
+    min-width: 16rem;
+}
+
+.bar{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 15rem;
+}
+
+.result-title{
+    font-family: 'Well';
+}
+
+.result-winner{
+    font-weight: bold;
+}
+
+.king-progress-bar{
+    width: 4rem;
+    height: 15rem;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: #949393;
+    transition: height 0.5s ease;
+}
+
+.active{
+    background-color: #333;
+}
+
+.title{
+    font-family: 'adumu';
+    font-size: 2rem;
+}
+
+
+
 /*Área inferior*/
 
 
