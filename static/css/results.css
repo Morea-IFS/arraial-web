@@ -26,23 +26,26 @@
 body {
     overflow-x: hidden;
     background-color: #d1d1b3;
+    height: 100vh;
 }
 
 a {
     text-decoration: none;
 }
 
+header{
+    position: sticky;
+    top: 0;
+    height: 82px;
+}
+
 .container-navbar {
     display: flex;
-    z-index: 1;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: auto;
-    position: fixed;
     border-bottom: solid 2px black;
     background-color: #d1d1b3;
-    top: 0;
 }
 
 .navbar {
@@ -82,8 +85,12 @@ a {
 
 
 .container{
-    margin: 10rem 5rem 0 5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     user-select: none;
+    height: calc(100% - 82px);
+    margin-bottom: 7rem;
 }
 
 .candidate{
@@ -95,12 +102,9 @@ a {
 .crown{
     height: 30px;
     width: 30px;
-    margin-bottom: -2rem
 }
 
-
-
-.king-result{
+.result{
     display: flex;
     justify-content: space-evenly;
     border-bottom: solid black 2px;
@@ -318,6 +322,16 @@ a {
 
 
 @media (max-width: 768px) {
+
+    .container{
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    
+
+
+    /*Área inferior*/
+
 
     .footer-content {
         flex-direction: column;
