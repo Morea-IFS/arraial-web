@@ -90,7 +90,6 @@ header{
     align-items: center;
     user-select: none;
     height: calc(100% - 82px);
-    margin-bottom: 7rem;
 }
 
 .candidate{
@@ -318,6 +317,10 @@ header{
     .link-navbar {
         color: white;
     }
+
+    .container{
+        min-height: 120vh;
+    }
 }
 
 
@@ -327,7 +330,6 @@ header{
         flex-direction: column;
         justify-content: space-evenly;
     }
-    
 
 
     /*Área inferior*/
