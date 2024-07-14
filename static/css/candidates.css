@@ -212,6 +212,7 @@ a {
     color: rgb(0, 0, 0);
     background-color: rgb(255, 255, 255);
     width: 115px;
+    text-align: center;
 }
 
 .footer-realization {
