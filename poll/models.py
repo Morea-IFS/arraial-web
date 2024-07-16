@@ -17,3 +17,11 @@ class Candidato(models.Model):
 
     def __str__(self):
         return f"{self.candidato} - Número: {self.numero_candidato}"
+    
+class Candidata(models.Model):
+    candidata = models.CharField(max_length=100, unique=True)
+    numero_candidata = models.IntegerField(validators=[MaxValueValidator(99),MinValueValidator(10)])
+    votos_candidata = models.IntegerField(default=0,editable=False)
+
+    def __str__(self):
+        return f"{self.candidata} - Número: {self.numero_candidata}"
