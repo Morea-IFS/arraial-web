@@ -1,79 +1,157 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="{% static 'css/results.css' %}" />
+		<link rel="shortcut icon" href="{% static 'images/poll/logo-morea.svg' %}" />
+		<title>Resultados</title>
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/results.css' %}">
-    <link rel="shortcut icon" href="{% static 'images/poll/logo-morea.svg' %}">
-    <title>Resultados</title>
-</head>
-
-<body>
-    <header>
-        <nav class="container-navbar">
-            <div class="logo-navbar">
-                <a href="/">
-                    <img class="logo" src="{% static 'images/poll/logo-morea.svg' %}" alt="Logo Morea">
-                </a>
-                <div class="mobile-menu">
-                    <div class="line1"></div>
-                    <div class="line2"></div>
-                    <div class="line3"></div>
-                </div>
-            </div>
-            <div class="nav-list">
-                <ul>
-                    <a class="link-navbar" href="index.html">
-                        <li>Início</li>
-                    </a>
-                    <a class="link-navbar" href="candidates.html">
-                        <li>Candidatos</li>
-                    </a>
-                    <a class="link-navbar" href="results.html">
-                        <li>Resultados</li>
-                    </a>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <main></main>
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img class="footer-hat" src="{% static 'images/poll/chapeu.svg' %}" alt="chapéu">
-                <p class="footer-title">Rei e Rainha</p>
-                <br>
-                <p class="footer-title-2">RJ-45</p>
-            </div>
-            <div class="footer-realization">
-                <p class="footer-title-realization">Realization</p>
-                <div class="footer-image-realization">
-                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-morea.svg' %}"
-                        alt="Logo Morea">
-                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-coirc.svg' %}"
-                        alt="Logo Coirc">
-                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-ifs.png' %}"
-                        alt="Logo IFS">
-                </div>
-            </div>
-            <div class="footer-nav-list">
-                <ul>
-                    <a class="footer-link-navbar" href="/">
-                        <li>Início</li>
-                    </a>
-                    <a class="footer-link-navbar" href="/candidates">
-                        <li>Candidatos</li>
-                    </a>
-                    <a class="footer-link-navbar" href="/result-pendent">
-                        <li>Resultados</li>
-                    </a>
-                </ul>
-            </div>
-        </div>
-    </footer>
-    <script src="{% static 'js/mobile-menu.js' %}"></script>
-</body>
-
+	<body>
+		<header>
+			<nav class="container-navbar">
+				<div class="logo-navbar">
+					<a href="/">
+						<img
+							class="logo"
+							src="{% static 'images/poll/logo-morea.svg' %}"
+							alt="Logo Morea"
+						/>
+					</a>
+					<div class="mobile-menu">
+						<div class="line1"></div>
+						<div class="line2"></div>
+						<div class="line3"></div>
+					</div>
+				</div>
+				<div class="nav-list">
+					<ul>
+						<a class="link-navbar" href="/">
+							<li>Início</li>
+						</a>
+						<a class="link-navbar" href="/candidates">
+							<li>Candidatos</li>
+						</a>
+						<a class="link-navbar" href="/results">
+							<li>Resultados</li>
+						</a>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<main class="container">
+			<div class="candidate">
+				<div class="result">
+					<div class="bar">
+						<p class="result-title">Juvanete</p>
+						<p class="result-title">37%</p>
+						<div
+							class="king-progress-bar"
+							style="height: calc(37 * 1.8px)"
+						></div>
+					</div>
+					<div class="bar">
+						<p class="result-title result-winner result-winner-crown">
+							Juvanete
+						</p>
+						<p class="result-title result-winner">55%</p>
+						<div
+							class="king-progress-bar active"
+							style="height: calc(55 * 1.8px)"
+						></div>
+					</div>
+					<div class="bar">
+						<p class="result-title">Juvanete</p>
+						<p class="result-title">8%</p>
+						<div
+							class="king-progress-bar"
+							style="height: calc(8 * 1.8px)"
+						></div>
+					</div>
+				</div>
+				<p class="title">Rei</p>
+			</div>
+			<div class="candidate">
+				<div class="result">
+					<div class="bar">
+						<p class="result-title">Juvanete</p>
+						<p class="result-title">37%</p>
+						<div
+							class="king-progress-bar"
+							style="height: calc(37 * 1.8px)"
+						></div>
+					</div>
+					<div class="bar">
+						<p class="result-title result-winner result-winner-crown">
+							Juvanete
+						</p>
+						<p class="result-title result-winner">55%</p>
+						<div
+							class="king-progress-bar active"
+							style="height: calc(55 * 1.8px)"
+						></div>
+					</div>
+					<div class="bar">
+						<p class="result-title">Juvanete</p>
+						<p class="result-title">8%</p>
+						<div
+							class="king-progress-bar"
+							style="height: calc(8 * 1.8px)"
+						></div>
+					</div>
+				</div>
+				<p class="title">Rainha</p>
+			</div>
+		</main>
+		<footer>
+			<div class="footer-content">
+				<div class="footer-logo">
+					<img
+						class="footer-hat"
+						src="{% static 'images/poll/chapeu.svg' %}"
+						alt="chapéu"
+					/>
+					<p class="footer-title">Rei e Rainha</p>
+					<br />
+					<p class="footer-title-2">RJ-45</p>
+				</div>
+				<div class="footer-realization">
+					<p class="footer-title-realization">Realization</p>
+					<div class="footer-image-realization">
+						<img
+							class="footer-image-item-realization"
+							src="{% static 'images/poll/logo-morea.svg' %}"
+							alt="Logo Morea"
+						/>
+						<img
+							class="footer-image-item-realization"
+							src="{% static 'images/poll/logo-coirc.svg' %}"
+							alt="Logo Coirc"
+						/>
+						<img
+							class="footer-image-item-realization"
+							src="{% static 'images/poll/logo-ifs.png' %}"
+							alt="Logo IFS"
+						/>
+					</div>
+				</div>
+				<div class="footer-nav-list">
+					<ul>
+						<a class="footer-link-navbar" href="/">
+							<li>Início</li>
+						</a>
+						<a class="footer-link-navbar" href="/candidates">
+							<li>Candidatos</li>
+						</a>
+						<a class="footer-link-navbar" href="/result-pendent">
+							<li>Resultados</li>
+						</a>
+					</ul>
+				</div>
+			</div>
+		</footer>
+		<script src="{% static 'js/mobile-menu.js' %}"></script>
+	</body>
 </html>

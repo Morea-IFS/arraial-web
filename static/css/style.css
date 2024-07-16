@@ -34,6 +34,7 @@ a {
 
 .container-navbar {
     display: flex;
+    z-index: 1;
     align-items: center;
     justify-content: space-between;
     width: 100%;
@@ -105,6 +106,7 @@ a {
     color: white;
     background-color: black;
     width: 170px;
+    text-align: center;
 }
 
 .text {
@@ -123,7 +125,7 @@ a {
     height: calc(100vh - 87px);
     align-items: center;
     justify-content: space-between;
-    margin: 87px 6% 0 10%;
+    margin: 87px 6% 2rem 10%;
     user-select: none;
 }
 
@@ -169,6 +171,7 @@ a {
     color: rgb(0, 0, 0);
     background-color: rgb(255, 255, 255);
     width: 115px;
+    text-align: center;
 }
 
 .footer-realization {
@@ -214,6 +217,7 @@ a {
 
 
     /*Área De navegação*/
+
 
     .navbar {
         display: flex;
@@ -303,15 +307,17 @@ a {
         color: white;
     }
 
+    
     /*Área de apresentação*/
+
 
     .div-title {
         margin: 0px 0 30px 40px;
     }
 
     .hat {
-        height: 8em;
-        width: 8em;
+        height: 9em;
+        width: 9em;
         margin-bottom: -60px;
         margin-left: -80px;
     }
@@ -327,7 +333,6 @@ a {
 
     .text {
         font-size: 18px;
-        margin-bottom: 25%;
     }
 
     .cactus {
@@ -335,9 +340,7 @@ a {
     }
 
     .all {
-        flex-direction: column;
-        margin: 87px 6% 60% 10%;
-        ;
+        margin: 87px 6% 65% 10%;
     }
 
     .couple {
@@ -349,6 +352,35 @@ a {
 
 
 @media (max-width: 768px) {
+
+
+    /*Área de apresentação*/
+
+
+    .div-title {
+        margin: 0px 0 30px 40px;
+    }
+
+    .text {
+        margin-bottom: 2rem;
+    }
+
+    .hat {
+        margin-bottom: -60px;
+        margin-left: -80px;
+    }
+
+    .cactus {
+        display: none;
+    }
+
+    .all {
+        flex-direction: column;
+    }
+
+
+    /*Área inferior*/
+
 
     .footer-content {
         flex-direction: column;
