@@ -6,6 +6,8 @@ class Aluno(models.Model):
     matricula = models.CharField(max_length=20, unique=True)
     nome = models.CharField(max_length=100)
     turma = models.IntegerField(default=0,validators=[MaxValueValidator(3),MinValueValidator(1)])
+    candidato = models.IntegerField(default=0, editable=False)
+    candidata = models.IntegerField(default=0, editable=False)
     votou = models.BooleanField(default=False,editable=False)
 
     def __str__(self):

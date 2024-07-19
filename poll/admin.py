@@ -1,13 +1,12 @@
 from django.contrib import admin
-from . models import Aluno
-from . models import Candidato
-from . models import Candidata
+from . models import Aluno, Candidata, Candidato
+
 # Register your models here.
 
 @admin.register(Aluno)
 class AlunoAdmin(admin.ModelAdmin):
 
-    list_display = ('nome','matricula','turma','votou')
+    list_display = ('nome','matricula','turma','votou','candidato','candidata')
     search_fields = ('nome','matricula')
 
 @admin.register(Candidato)

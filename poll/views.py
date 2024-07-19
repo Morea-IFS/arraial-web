@@ -10,12 +10,10 @@ def index(request):
 def candidates(request):
     return render(request, 'candidates.html')
 
-def resultpendent(request):
-    return render(request, 'result-pendent.html')
-
 def results(request):
     return render(request, 'results.html')
 
+#api
 def contabilizar_votos(request):
     matricula = request.GET.get('matricula')
     numero_do_candidato = request.GET.get('numero_voto_candidato')
@@ -29,7 +27,9 @@ def contabilizar_votos(request):
         candidato = Candidato.objects.get(numero_voto_candidato=numero_do_candidato)
         candidata = Candidata.objects.get(numero_voto_candidata=numero_da_candidata)
         Aluno.votou = True
+        
         Aluno.save()
+        
         Candidato.votos_do_candidato += 1
         Candidato.save()
         Candidata.votos_da_candidata += 1
@@ -37,3 +37,31 @@ def contabilizar_votos(request):
         return JsonResponse({'success':'Voto contabilizado com sucesso'},status=200)
     except Aluno.DoesNotExist:
         return JsonResponse({'error':'Matricula não encontrada'}, status=404)
+    
+#apagar nestante testando maiores candidatos
+def resultados_votos(request):
+    lista_de_candidatos = Candidato.objects.all()
+    lista_de_candidatas = Candidata.objects.all()
+    top_candidatos = Candidato.objects.order_by('-votos_do_candidato')[:3]
+    top_candidatas = Candidata.objects.order_by('-votos_da_candidata')[:3]
+    
+    candidato_1 = top_candidatos[0] if len(top_candidatos) > 0 else None
+    candidato_2 = top_candidatos[1] if len(top_candidatos) > 1 else None
+    candidato_3 = top_candidatos[2] if len(top_candidatos) > 2 else None
+
+    candidata_1 = top_candidatas[0] if len(top_candidatas) > 0 else None
+    candidata_2 = top_candidatas[1] if len(top_candidatas) > 1 else None
+    candidata_3 = top_candidatas[2] if len(top_candidatas) > 2 else None
+
+    context = {
+        'lista_de_candidatos': lista_de_candidatos,
+        'lista_de_candidatas': lista_de_candidatas,
+        'candidato_1': candidato_1,
+        'candidato_2': candidato_2,
+        'candidato_3': candidato_3,
+        'candidata_1': candidata_1,
+        'candidata_2': candidata_2,
+        'candidata_3': candidata_3,
+    }
+    return render(request, 'teste.html', context)
+    
