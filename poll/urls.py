@@ -23,7 +23,5 @@ urlpatterns = [
     path('candidates/', views.candidates, name="Candidates Area"),
     path('results/', views.results, name="results"),
     path('api/receivedata', views.contabilizar_votos, name="receive data"),
-
-    #apagar nestante testando maiores candidatos
-    path('resultados/', views.resultados_votos, name='resultados_votos'),
+    path('resultados/',views.resultados_votos, name="Resultados dos Votos")
 ]

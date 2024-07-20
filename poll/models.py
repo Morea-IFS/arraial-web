@@ -3,9 +3,9 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 class Aluno(models.Model):
-    matricula = models.CharField(max_length=20, unique=True)
     nome = models.CharField(max_length=100)
-    turma = models.IntegerField(default=0,validators=[MaxValueValidator(3),MinValueValidator(1)])
+    matricula = models.CharField(max_length=20, unique=True)
+    turma = models.IntegerField(validators=[MaxValueValidator(3),MinValueValidator(1)])
     candidato = models.IntegerField(default=0, editable=False)
     candidata = models.IntegerField(default=0, editable=False)
     votou = models.BooleanField(default=False,editable=False)

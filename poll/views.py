@@ -63,5 +63,10 @@ def resultados_votos(request):
         'candidata_2': candidata_2,
         'candidata_3': candidata_3,
     }
-    return render(request, 'teste.html', context)
+    pagina_rei_liberada = any(candidato.votos_do_candidato > 0 for candidato in lista_de_candidatos)
+    pagina_rainha_liberada = any(candidata.votos_da_candidata > 0 for candidata in lista_de_candidatas)
+    if pagina_rei_liberada and pagina_rainha_liberada:
+        return render(request, 'teste.html', context)
+    else:
+        return render(request, 'result-pendent.html')
     
