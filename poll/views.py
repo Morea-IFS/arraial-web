@@ -11,35 +11,6 @@ def candidates(request):
     return render(request, 'candidates.html')
 
 def results(request):
-    return render(request, 'results.html')
-
-#api
-def contabilizar_votos(request):
-    matricula = request.GET.get('matricula')
-    numero_do_candidato = request.GET.get('numero_voto_candidato')
-    numero_da_candidata = request.GET.get('numero_voto_candidata')
-    if not matricula or not numero_do_candidato or not numero_da_candidata:
-        return JsonResponse({'error':'Matricula e os números dos candidatos são obrigatorios'}, status=400)
-    try:
-        aluno = Aluno.objects.get(matricula=matricula)
-        if aluno.votou:
-            return JsonResponse({'error':'aluno já votou'},status=400)
-        candidato = Candidato.objects.get(numero_voto_candidato=numero_do_candidato)
-        candidata = Candidata.objects.get(numero_voto_candidata=numero_da_candidata)
-        Aluno.votou = True
-        
-        Aluno.save()
-        
-        Candidato.votos_do_candidato += 1
-        Candidato.save()
-        Candidata.votos_da_candidata += 1
-        Candidata.save()
-        return JsonResponse({'success':'Voto contabilizado com sucesso'},status=200)
-    except Aluno.DoesNotExist:
-        return JsonResponse({'error':'Matricula não encontrada'}, status=404)
-    
-#apagar nestante testando maiores candidatos
-def resultados_votos(request):
     lista_de_candidatos = Candidato.objects.all()
     lista_de_candidatas = Candidata.objects.all()
     top_candidatos = Candidato.objects.order_by('-votos_do_candidato')[:3]
@@ -66,7 +37,31 @@ def resultados_votos(request):
     pagina_rei_liberada = any(candidato.votos_do_candidato > 0 for candidato in lista_de_candidatos)
     pagina_rainha_liberada = any(candidata.votos_da_candidata > 0 for candidata in lista_de_candidatas)
     if pagina_rei_liberada and pagina_rainha_liberada:
-        return render(request, 'teste.html', context)
+        return render(request, 'results.html', context)
     else:
-        return render(request, 'result-pendent.html')
+        return render(request, 'result-pendent.html') 
     
+#api
+def contabilizar_votos(request):
+    matricula = request.GET.get('matricula')
+    numero_do_candidato = request.GET.get('numero_voto_candidato')
+    numero_da_candidata = request.GET.get('numero_voto_candidata')
+    if not matricula or not numero_do_candidato or not numero_da_candidata:
+        return JsonResponse({'error':'Matricula e os números dos candidatos são obrigatorios'}, status=400)
+    try:
+        aluno = Aluno.objects.get(matricula=matricula)
+        if aluno.votou:
+            return JsonResponse({'error':'aluno já votou'},status=400)
+        candidato = Candidato.objects.get(numero_voto_candidato=numero_do_candidato)
+        candidata = Candidata.objects.get(numero_voto_candidata=numero_da_candidata)
+        Aluno.votou = True
+        
+        Aluno.save()
+        
+        Candidato.votos_do_candidato += 1
+        Candidato.save()
+        Candidata.votos_da_candidata += 1
+        Candidata.save()
+        return JsonResponse({'success':'Voto contabilizado com sucesso'},status=200)
+    except Aluno.DoesNotExist:
+        return JsonResponse({'error':'Matricula não encontrada'}, status=404)   
