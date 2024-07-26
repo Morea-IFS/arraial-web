@@ -44,30 +44,35 @@
 		<main class="container">
 			<div class="candidate">
 				<div class="result">
+					<!--TOP 3-->
 					<div class="bar">
-						<p class="result-title">Juvanete</p>
-						<p class="result-title">37%</p>
+						<p class="result-title">{{candidato_3.candidato}}</p>
+						<p class="result-title">{{porcentanditato3}}%</p>
 						<div
 							class="king-progress-bar"
-							style="height: calc(37 * 1.8px)"
+							style="height: calc({{porcentanditato3}} * 1.8px)"
 						></div>
 					</div>
+
+					<!--TOP 1-->
 					<div class="bar">
 						<p class="result-title result-winner result-winner-crown">
-							Juvanete
+							{{candidato_1.candidato}}
 						</p>
-						<p class="result-title result-winner">55%</p>
+						<p class="result-title result-winner">{{porcentanditato1}}%</p>
 						<div
 							class="king-progress-bar active"
-							style="height: calc(55 * 1.8px)"
+							style="height: calc({{porcentanditato1}} * 1.8px)"
 						></div>
 					</div>
+
+					<!--TOP 2-->
 					<div class="bar">
-						<p class="result-title">Juvanete</p>
-						<p class="result-title">8%</p>
+						<p class="result-title">{{candidato_2.candidato}}</p>
+						<p class="result-title">{{porcentanditato2}}%</p>
 						<div
 							class="king-progress-bar"
-							style="height: calc(8 * 1.8px)"
+							style="height: calc({{porcentanditato2}} * 1.8px)"
 						></div>
 					</div>
 				</div>
@@ -75,30 +80,33 @@
 			</div>
 			<div class="candidate">
 				<div class="result">
+					<!--TOP 3-->
 					<div class="bar">
-						<p class="result-title">Juvanete</p>
-						<p class="result-title">37%</p>
+						<p class="result-title">{{candidata_3.candidata}}</p>
+						<p class="result-title">{{porcentanditata3}}%</p>
 						<div
 							class="king-progress-bar"
-							style="height: calc(37 * 1.8px)"
+							style="height: calc({{porcentanditata3}} * 1.8px)"
 						></div>
 					</div>
+					<!--TOP 1-->
 					<div class="bar">
 						<p class="result-title result-winner result-winner-crown">
-							Juvanete
+							{{candidata_1.candidata}}
 						</p>
-						<p class="result-title result-winner">55%</p>
+						<p class="result-title result-winner">{{porcentanditata1}}%</p>
 						<div
 							class="king-progress-bar active"
-							style="height: calc(55 * 1.8px)"
+							style="height: calc({{porcentanditata1}} * 1.8px)"
 						></div>
 					</div>
+					<!--TOP 2-->
 					<div class="bar">
-						<p class="result-title">Juvanete</p>
-						<p class="result-title">8%</p>
+						<p class="result-title">{{candidata_2.candidata}}</p>
+						<p class="result-title">{{porcentanditata2}}%</p>
 						<div
 							class="king-progress-bar"
-							style="height: calc(8 * 1.8px)"
+							style="height: calc({{porcentanditata2}} * 1.8px)"
 						></div>
 					</div>
 				</div>
@@ -145,7 +153,7 @@
 						<a class="footer-link-navbar" href="/candidates">
 							<li>Candidatos</li>
 						</a>
-						<a class="footer-link-navbar" href="/result-pendent">
+						<a class="footer-link-navbar" href="/results">
 							<li>Resultados</li>
 						</a>
 					</ul>

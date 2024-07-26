@@ -24,6 +24,24 @@ def results(request):
     candidata_2 = top_candidatas[1] if len(top_candidatas) > 1 else None
     candidata_3 = top_candidatas[2] if len(top_candidatas) > 2 else None
 
+    def calcular_porcentagem(value, total):
+        if total == 0:
+            return 0
+        return f'{((value / total) * 100):5.1f}'
+        
+
+    candidatos_total= candidato_1.votos_do_candidato + candidato_2.votos_do_candidato + candidato_3.votos_do_candidato
+    porcentanditato1 = calcular_porcentagem(candidato_1.votos_do_candidato, candidatos_total)
+    porcentanditato2 = calcular_porcentagem(candidato_2.votos_do_candidato, candidatos_total)
+    porcentanditato3 = calcular_porcentagem(candidato_3.votos_do_candidato, candidatos_total)
+
+    candidatas_total= candidata_1.votos_da_candidata + candidata_2.votos_da_candidata + candidata_3.votos_da_candidata
+    porcentanditata1 = calcular_porcentagem(candidata_1.votos_da_candidata, candidatas_total)
+    porcentanditata2 = calcular_porcentagem(candidata_2.votos_da_candidata, candidatas_total)
+    porcentanditata3 = calcular_porcentagem(candidata_3.votos_da_candidata, candidatas_total)
+    
+    
+
     context = {
         'lista_de_candidatos': lista_de_candidatos,
         'lista_de_candidatas': lista_de_candidatas,
@@ -33,6 +51,13 @@ def results(request):
         'candidata_1': candidata_1,
         'candidata_2': candidata_2,
         'candidata_3': candidata_3,
+        'porcentanditato1': porcentanditato1,
+        'porcentanditato2': porcentanditato2,
+        'porcentanditato3': porcentanditato3,
+        'porcentanditata1': porcentanditata1,
+        'porcentanditata2': porcentanditata2,
+        'porcentanditata3': porcentanditata3,
+
     }
     pagina_rei_liberada = any(candidato.votos_do_candidato > 0 for candidato in lista_de_candidatos)
     pagina_rainha_liberada = any(candidata.votos_da_candidata > 0 for candidata in lista_de_candidatas)
