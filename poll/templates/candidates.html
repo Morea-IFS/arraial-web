@@ -45,54 +45,16 @@
             </div>
             <div class="all-candidates">
                 <div class="all-candidates-child">
+                    {% for candidato_p in perfil_candidato %}
                     <div class="all-candidates-child-item">
-                        <img class="all-candidates-child-item-img" src="{% static 'images/poll/logo-morea.svg' %}"
-                            alt="Usuário não encontrado">
-                        <p class="title-candidates">Aristeudes</p>
-                        <p class="text-candidates">(2 IRC)</p>
-                        <p class="text-candidates text-candidates-margin">Lorem ipsum, dolor sit amet consectetur
-                            adipisicing elit.</p>
+                        <img class="all-candidates-child-item-img" src="{% get_media_prefix %}{{candidato_p.foto_candidato}}" alt="User Profile">
+                        <p class="title-candidates">{{candidato_p.candidato}}</p>
+                        <p class="text-candidates">{{candidato_p.turma_candidato}}ºIRC</p>
+                        <p class="text-candidates text-candidates-margin">{{candidato_p.descricao_candidato}}</p>
                     </div>
-                    <div class="all-candidates-child-item">
-                        <img class="all-candidates-child-item-img" src="{% static 'images/poll/logo-morea.svg' %}"
-                            alt="Usuário não encontrado">
-                        <p class="title-candidates">Aristeudes</p>
-                        <p class="text-candidates">(2 IRC)</p>
-                        <p class="text-candidates text-candidates-margin">Lorem ipsum, dolor sit amet consectetur
-                            adipisicing elit.</p>
-                    </div>
-                    <div class="all-candidates-child-item">
-                        <img class="all-candidates-child-item-img" src="{% static 'images/poll/logo-morea.svg' %}"
-                            alt="Usuário não encontrado">
-                        <p class="title-candidates">Aristeudes</p>
-                        <p class="text-candidates">(2 IRC)</p>
-                        <p class="text-candidates text-candidates-margin">Lorem ipsum, dolor sit amet consectetur
-                            adipisicing elit.</p>
-                    </div>
-                    <div class="all-candidates-child-item">
-                        <img class="all-candidates-child-item-img" src="{% static 'images/poll/logo-morea.svg' %}"
-                            alt="Usuário não encontrado">
-                        <p class="title-candidates">Aristeudes</p>
-                        <p class="text-candidates">(2 IRC)</p>
-                        <p class="text-candidates text-candidates-margin">Lorem ipsum, dolor sit amet consectetur
-                            adipisicing elit.</p>
-                    </div>
-                    <div class="all-candidates-child-item">
-                        <img class="all-candidates-child-item-img" src="{% static 'images/poll/logo-morea.svg' %}"
-                            alt="Usuário não encontrado">
-                        <p class="title-candidates">Aristeudes</p>
-                        <p class="text-candidates">(2 IRC)</p>
-                        <p class="text-candidates text-candidates-margin">Lorem ipsum, dolor sit amet consectetur
-                            adipisicing elit.</p>
-                    </div>
-                    <div class="all-candidates-child-item">
-                        <img class="all-candidates-child-item-img" src="{% static 'images/poll/logo-morea.svg' %}"
-                            alt="Usuário não encontrado">
-                        <p class="title-candidates">Aristeudes</p>
-                        <p class="text-candidates">(2 IRC)</p>
-                        <p class="text-candidates text-candidates-margin">Lorem ipsum, dolor sit amet consectetur
-                            adipisicing elit.</p>
-                    </div>
+                    
+                    {% endfor %}
+                    
                 </div>
             </div>
         </div>
@@ -102,54 +64,14 @@
             </div>
             <div class="all-candidates">
                 <div class="all-candidates-child">
+                    {% for candidata_p in perfil_candidata %}
                     <div class="all-candidates-child-item">
-                        <img class="all-candidates-child-item-img" src="{% static 'images/poll/logo-morea.svg' %}"
-                            alt="Usuário não encontrado">
-                        <p class="title-candidates">Juvanete</p>
-                        <p class="text-candidates">(2 IRC)</p>
-                        <p class="text-candidates text-candidates-margin">Lorem ipsum, dolor sit amet consectetur
-                            adipisicing elit.</p>
+                        <img class="all-candidates-child-item-img" src="{% get_media_prefix %}{{candidata_p.foto_candidata}}" alt="User Profile">
+                        <p class="title-candidates">{{candidata_p.candidata}}</p>
+                        <p class="text-candidates">{{candidata_p.turma_candidata}}ºIRC</p>
+                        <p class="text-candidates text-candidates-margin">{{candidata_p.descricao_candidata}}</p>
                     </div>
-                    <div class="all-candidates-child-item">
-                        <img class="all-candidates-child-item-img" src="{% static 'images/poll/logo-morea.svg' %}"
-                            alt="Usuário não encontrado">
-                        <p class="title-candidates">Juvanete</p>
-                        <p class="text-candidates">(2 IRC)</p>
-                        <p class="text-candidates text-candidates-margin">Lorem ipsum, dolor sit amet consectetur
-                            adipisicing elit.</p>
-                    </div>
-                    <div class="all-candidates-child-item">
-                        <img class="all-candidates-child-item-img" src="{% static 'images/poll/logo-morea.svg' %}"
-                            alt="Usuário não encontrado">
-                        <p class="title-candidates">Juvanete</p>
-                        <p class="text-candidates">(2 IRC)</p>
-                        <p class="text-candidates text-candidates-margin">Lorem ipsum, dolor sit amet consectetur
-                            adipisicing elit.</p>
-                    </div>
-                    <div class="all-candidates-child-item">
-                        <img class="all-candidates-child-item-img" src="{% static 'images/poll/logo-morea.svg' %}"
-                            alt="Usuário não encontrado">
-                        <p class="title-candidates">Juvanete</p>
-                        <p class="text-candidates">(2 IRC)</p>
-                        <p class="text-candidates text-candidates-margin">Lorem ipsum, dolor sit amet consectetur
-                            adipisicing elit.</p>
-                    </div>
-                    <div class="all-candidates-child-item">
-                        <img class="all-candidates-child-item-img" src="{% static 'images/poll/logo-morea.svg' %}"
-                            alt="Usuário não encontrado">
-                        <p class="title-candidates">Juvanete</p>
-                        <p class="text-candidates">(2 IRC)</p>
-                        <p class="text-candidates text-candidates-margin">Lorem ipsum, dolor sit amet consectetur
-                            adipisicing elit.</p>
-                    </div>
-                    <div class="all-candidates-child-item">
-                        <img class="all-candidates-child-item-img" src="{% static 'images/poll/logo-morea.svg' %}"
-                            alt="Usuário não encontrado">
-                        <p class="title-candidates">Juvanete</p>
-                        <p class="text-candidates">(2 IRC)</p>
-                        <p class="text-candidates text-candidates-margin">Lorem ipsum, dolor sit amet consectetur
-                            adipisicing elit.</p>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
