@@ -46,8 +46,20 @@
 				<div class="result">
 					<!--TOP 3-->
 					<div class="bar">
-						<p class="result-title">{{candidato_3.candidato}}</p>
-						<p class="result-title">{{porcentanditato3}}%</p>
+						<p class="result-title">
+							{% if candidato_3.votos_do_candidato > 0 %}
+								{{ candidato_3.candidato }}
+							{% else %}
+								Candidato 3
+							{% endif %}
+						</p>
+						<p class="result-title">
+							{% if porcentanditato3 == 0 %}
+							  0.0%
+							{% else %}
+							  {{ porcentanditato3 }}%
+							{% endif %}
+						  </p>
 						<div
 							class="king-progress-bar"
 							style="height: calc({{porcentanditato3}} * 1.8px)">
@@ -57,9 +69,19 @@
 					<!--TOP 1-->
 					<div class="bar">
 						<p class="result-title result-winner result-winner-crown">
-							{{candidato_1.candidato}}
+							{% if candidato_1.votos_do_candidato > 0 %}
+								{{ candidato_1.candidato }}
+						  	{% else %}
+							  Candidato 1
+						  	{% endif %}
 						</p>
-						<p class="result-title result-winner">{{porcentanditato1}}%</p>
+						<p class="result-title">
+							{% if porcentanditato1 == 0 %}
+							  0.0%
+							{% else %}
+							  {{ porcentanditato1 }}%
+							{% endif %}
+						  </p>
 						<div
 							class="king-progress-bar active"
 							style="height: calc({{porcentanditato1}} * 1.8px)"
@@ -68,8 +90,20 @@
 
 					<!--TOP 2-->
 					<div class="bar">
-						<p class="result-title">{{candidato_2.candidato}}</p>
-						<p class="result-title">{{porcentanditato2}}%</p>
+						<p class="result-title">
+							{% if candidato_2.votos_do_candidato > 0 %}
+								{{ candidato_2.candidato }}
+							{% else %}
+								Candidato 2
+							{% endif %}
+						</p>
+						<p class="result-title">
+							{% if porcentanditato2 == 0 %}
+							  0.0%
+							{% else %}
+							  {{ porcentanditato2 }}%
+							{% endif %}
+						  </p>
 						<div
 							class="king-progress-bar"
 							style="height: calc({{porcentanditato2}} * 1.8px)"
@@ -82,8 +116,20 @@
 				<div class="result">
 					<!--TOP 3-->
 					<div class="bar">
-						<p class="result-title">{{candidata_3.candidata}}</p>
-						<p class="result-title">{{porcentanditata3}}%</p>
+						<p class="result-title">
+							{% if candidata_3.votos_da_candidata > 0 %}
+								{{ candidata_3.candidata }}
+							{% else %}
+								Candidata 3
+							{% endif %}
+						</p>
+						<p class="result-title">
+							{% if porcentanditata3 == 0 %}
+							  0.0%
+							{% else %}
+							  {{ porcentanditata3 }}%
+							{% endif %}
+						  </p>
 						<div
 							class="king-progress-bar"
 							style="height: calc({{porcentanditata3}} * 1.8px)"
@@ -92,9 +138,19 @@
 					<!--TOP 1-->
 					<div class="bar">
 						<p class="result-title result-winner result-winner-crown">
-							{{candidata_1.candidata}}
+							{% if candidata_1.votos_da_candidata > 0 %}
+								{{ candidata_1.candidata }}
+						  	{% else %}
+							  	Candidata 1
+						  	{% endif %}
 						</p>
-						<p class="result-title result-winner">{{porcentanditata1}}%</p>
+						<p class="result-title">
+							{% if porcentanditata1 == 0 %}
+							  0.0%
+							{% else %}
+							  {{ porcentanditata1 }}%
+							{% endif %}
+						  </p>
 						<div
 							class="king-progress-bar active"
 							style="height: calc({{porcentanditata1}} * 1.8px)"
@@ -102,8 +158,20 @@
 					</div>
 					<!--TOP 2-->
 					<div class="bar">
-						<p class="result-title">{{candidata_2.candidata}}</p>
-						<p class="result-title">{{porcentanditata2}}%</p>
+						<p class="result-title">
+							{% if candidata_2.votos_da_candidata > 0 %}
+								{{ candidata_2.candidata }}
+						  	{% else %}
+							  	Candidata 2
+						  	{% endif %}
+						</p>
+						<p class="result-title">
+							{% if porcentanditata2 == 0 %}
+							 0.0%
+							{% else %}
+								{{ porcentanditata2 }}%
+							{% endif %}
+						  </p>
 						<div
 							class="king-progress-bar"
 							style="height: calc({{porcentanditata2}} * 1.8px)"

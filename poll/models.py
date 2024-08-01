@@ -19,7 +19,7 @@ class Candidato(models.Model):
     foto_candidato = models.ImageField(upload_to='foto_candidato/', default='defaults/profile_default.png', blank=True)
     turma_candidato = models.IntegerField(default=0,validators=[MaxValueValidator(3),MinValueValidator(1)])
     descricao_candidato = models.CharField(max_length=256, blank=True)
-    numero_do_candidato = models.IntegerField(validators=[MaxValueValidator(99),MinValueValidator(10)], blank=False)
+    numero_do_candidato = models.IntegerField(validators=[MaxValueValidator(99),MinValueValidator(10)], blank=False, unique=True)
     votos_do_candidato = models.IntegerField(default=0)
 
     def __str__(self):
@@ -31,7 +31,7 @@ class Candidata(models.Model):
     foto_candidata = models.ImageField(upload_to='foto_candidata/', default='defaults/profile_default.png', blank=True)
     turma_candidata = models.IntegerField(default=0,validators=[MaxValueValidator(3),MinValueValidator(1)])
     descricao_candidata = models.CharField(max_length=256, blank=True)
-    numero_da_candidata = models.IntegerField(validators=[MaxValueValidator(99),MinValueValidator(10)], blank=False)
+    numero_da_candidata = models.IntegerField(validators=[MaxValueValidator(99),MinValueValidator(10)], blank=False, unique=True)
     votos_da_candidata = models.IntegerField(default=0)
 
     def __str__(self):
