@@ -20,7 +20,7 @@ class Candidato(models.Model):
     turma_candidato = models.IntegerField(default=0,validators=[MaxValueValidator(3),MinValueValidator(1)])
     descricao_candidato = models.CharField(max_length=256, blank=True)
     numero_do_candidato = models.IntegerField(validators=[MaxValueValidator(99),MinValueValidator(10)], blank=False, unique=True)
-    votos_do_candidato = models.IntegerField(default=0)
+    votos_do_candidato = models.IntegerField(default=0,editable=False)
 
     def __str__(self):
         return f"{self.candidato} - Número: {self.numero_do_candidato}"
@@ -32,7 +32,7 @@ class Candidata(models.Model):
     turma_candidata = models.IntegerField(default=0,validators=[MaxValueValidator(3),MinValueValidator(1)])
     descricao_candidata = models.CharField(max_length=256, blank=True)
     numero_da_candidata = models.IntegerField(validators=[MaxValueValidator(99),MinValueValidator(10)], blank=False, unique=True)
-    votos_da_candidata = models.IntegerField(default=0)
+    votos_da_candidata = models.IntegerField(default=0,editable=False)
 
     def __str__(self):
         return f"{self.candidata} - Número: {self.numero_da_candidata}"
