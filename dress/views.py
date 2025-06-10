@@ -1,30 +1,44 @@
-from django.shortcuts import render
-from .models import Dress, DressEffects
-from rest_framework.decorators import api_view
-from .serializers import DressSerializer
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-
-# Create your views here.
+from rest_framework.decorators import api_view
+from .models import Dress, DressEffects
 
 @login_required(login_url='/login')
 def index(request):
-    dressData = Dress.objects.select_related('device').filter(device__is_authorized= 2).filter(device__application=1)
-    dressEffects = DressEffects.choices
-    
     if request.method == 'POST':
-        deviceId = request.POST.get('deviceId')
-        effect = request.POST.get('effect')
+        device_id = request.POST.get('deviceId')
+        effect = int(request.POST.get('effect', 0))  
         
-        dress = Dress.objects.get(id=deviceId)
-        
+        dress, created = Dress.objects.get_or_create(device_id=device_id)
         dress.effect = effect
+        dress.status = (effect != 0)  
         dress.save()
-    
-    return render(request, 'dashboard/dress.html', {'dressData': dressData, 'dressEffects': dressEffects})
+        return redirect('dress_dashboard')
+
+    dress_data = Dress.objects.select_related('device').filter(
+        device__is_authorized=2,
+        device__application=1
+    )
+    return render(request, 'dashboard/dress.html', {
+        'dressData': dress_data,
+        'dressEffects': DressEffects.choices
+    })
 
 @api_view(['GET'])
 def getEffect(request, pk):
-    dress = Dress.objects.select_related('device').get(device__id=pk)
-    
-    return JsonResponse(DressSerializer(dress).data, safe=False)
+    try:
+        dress = Dress.objects.get(device_id=pk)
+        return JsonResponse({
+            'status': dress.effect, 
+            'status': dress.effect,
+            'active': dress.status,
+            'debug': f"Efeito atual: {dress.effect} ({dress.get_effect_display()})"
+        })
+    except Dress.DoesNotExist:
+        dress = Dress.objects.create(device_id=pk)
+        return JsonResponse({
+            'effect': 0,
+            'status': 0,
+            'active': False
+        })

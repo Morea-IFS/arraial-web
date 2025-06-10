@@ -1,67 +1,91 @@
 {% extends "dashboard/layout.html" %}
 
-<!--  -->
-
 {% block head %}
 <title>Vestidos | Gerenciamento</title>
+<style>
+    .effect-option {
+        transition: all 0.3s ease;
+    }
+    .effect-option:hover {
+        transform: scale(1.05);
+    }
+    .effect-active {
+        background-color: #e9f7fe;
+        border-left: 4px solid #0d6efd;
+    }
+</style>
 {% endblock head %}
-<!--  -->
-{% block content %}
-<main class="container mt-5">
-	<h1>Gerenciamento de Vestidos</h1>
 
-	{% for dress in dressData %}
-	<div class="card mt-3 mb-2">
-		<div class="card-header">{{dress.device.name}}</div>
-		<div class="card-body">
-			<form method="post" class="d-flex flex-column" id="form">
-				{% csrf_token %}
-				<input
-					class="visually-hidden"
-					value="{{dress.device.id}}"
-					name="deviceId"
-					type="text"
-				/>
-				<div class="d-flex">
-					{% for effect in dressEffects %}
-					<!--  -->
-					{% if dress.effect == effect.0 %}
-					<div class="form-check px-4 py-2">
-						<input
-							class="form-check-input"
-							type="radio"
-							name="effect"
-							value="{{effect.0}}"
-							id="{{effect.0}}"
-							checked
-						/>
-						<label class="form-check-label" for="{{effect.0}}">
-							{{effect.1}}
-						</label>
-					</div>
-					{% else %}
-					<div class="form-check px-4 py-2">
-						<input
-							class="form-check-input"
-							type="radio"
-							name="effect"
-							value="{{effect.0}}"
-							id="{{effect.0}}"
-						/>
-						<label class="form-check-label" for="{{effect.0}}">
-							{{effect.1}}
-						</label>
-					</div>
-					{% endif %}
-					<!--  -->
-					{% endfor %}
-				</div>
-				<button type="submit" class="btn btn-primary px-4 align-self-center">
-					Salvar
-				</button>
-			</form>
-		</div>
-	</div>
-	{% endfor %}
+{% block content %}
+<main class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">Gerenciamento de Vestidos</h1>
+        <a href="{% url 'admin:dress_dress_add' %}" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Adicionar Vestido
+        </a>
+    </div>
+
+    {% if messages %}
+    <div class="mb-4">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row">
+        {% for dress in dressData %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{{ dress.device.deviceName }}</h5>
+                    <span class="badge bg-{% if dress.status %}success{% else %}secondary{% endif %}">
+                        {% if dress.status %}Ativo{% else %}Inativo{% endif %}
+                    </span>
+                </div>
+                <div class="card-body">
+                    <form method="post" class="d-flex flex-column h-100">
+                        {% csrf_token %}
+                        <input type="hidden" name="deviceId" value="{{ dress.device.id }}">
+                        
+                        <div class="mb-3">
+                            <h6 class="mb-3">Efeitos Disponíveis:</h6>
+                            <div class="list-group">
+                                {% for effect in dressEffects %}
+                                <label class="list-group-item effect-option {% if dress.effect == effect.0 %}effect-active{% endif %}">
+                                    <input class="form-check-input me-2" 
+                                           type="radio" 
+                                           name="effect" 
+                                           value="{{ effect.0 }}"
+                                           {% if dress.effect == effect.0 %}checked{% endif %}>
+                                    {{ effect.1 }}
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        <div class="mt-auto d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save"></i> Salvar Configuração
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-muted small">
+                    Última atualização: {{ dress.device.updated_at|date:"d/m/Y H:i" }}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                Nenhum vestido cadastrado. <a href="{% url 'admin:dress_dress_add' %}">Adicione um vestido</a> para começar.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </main>
 {% endblock content %}
