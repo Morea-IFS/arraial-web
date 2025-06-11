@@ -19,7 +19,6 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', include('poll.urls'), name="Home Page"),
     path('dashboard/', views.dashboard, name="Dashboard"),
     path('dress/' ,include('dress.urls'), name="Dress Manager"),
     path('detonador/', include('detonador.urls'), name="Detonador Manager"),

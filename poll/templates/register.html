@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+	LOGIN
+{% endblock title %}
+
+{% block contend %}
+<link rel="stylesheet" href="{% static 'css/layout/base.css' %}">
+<link rel="stylesheet" href="{% static 'css/layout/register.css' %}">
+<main>
+    <div class="contend">
+        <div class="div2">
+            <div class="login-area">
+                <h1>CANDIDATO(A)</h1>
+                <form action="{% url 'register_candidates' %}" method="POST" class="form-login" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <br><br>
+                    <input class="input-form" name="name" type="text" placeholder="Nome">
+                    <br><br>
+                    <input class="input-form" name="number" type="number" placeholder="Número">
+                    <br><br>
+                    <textarea name="description" placeholder="Descrição"></textarea>
+                    <br><br>
+                    <select name="sexo" id="">
+                        <option disabled selected value="2">Gênero</option>
+                        <option value="0">Masculino</option>
+                        <option value="1">Feminino</option>
+                    </select>
+                    <br><br>
+                    <select name="classroom" id="">
+                        <option disabled selected value="3">Turma</option>
+                        <option value="1">1º REDES</option>
+                        <option value="2">2º REDES</option>
+                        <option value="3">3º REDES</option>
+                    </select>
+                    <br><br>
+                    <input class="input-form" name="photo" type="file" placeholder="Username">                    
+                    <br><br>
+                    <button class="form-button-submit" type="submit"><p>Cadastrar</p></button>
+                    <br><br>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock contend %}

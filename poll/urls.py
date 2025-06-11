@@ -1,26 +1,27 @@
-"""
-URL configuration for arraial project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path('', views.index, name="Home Page"),
-    path('candidates/', views.candidates, name="Candidates Area"),
+    path('', views.index, name="home"),
+    path('candidates/', views.candidates, name="candidates"),
+    path('menu/', views.menu, name="menu"),
     path('results/', views.results, name="results"),
-    path('api/receivedata', views.contabilizar_votos, name="receive data"),
-]
+    path('api/receivedata', views.contabilizar_votos, name="receive-data"),
+
+    path('accounts/login', views.account_login, name="account-login"),
+    path('accounts/logout', views.account_logout, name="account-logout"),
+
+    path('votacao', views.votacao, name="votacao"),
+    path('candidato/<str:id>', views.candidato, name="candidato"),
+    path('candidata/<str:id>', views.candidata, name="candidata"),
+    path('confirmar/<int:number>/<str:candid>/<str:id>', views.confirmar, name="confirmar"),
+    path('confirmar_cand/<int:number>/<str:candid>/<str:id>', views.confirmar_cand, name="confirmar_cand"),
+    path('finalizacao', views.finalizacao, name="finalizacao"),
+
+    path('register/candidates', views.register_candidates, name="register-candidates"),
+    path('register/student', views.register_student, name="register-student"),
+
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
