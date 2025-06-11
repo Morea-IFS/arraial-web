@@ -1,0 +1,121 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/globals.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/poll/logo-morea.svg' %}">
+
+    <title>
+        {% block title %}
+            Urna RJ45
+        {% endblock title %}
+    </title>
+</head>
+
+<body>
+    <header>
+        <nav class="container-navbar">
+            <div class="logo-navbar">
+                <a href="/">
+                    <img class="logo" src="{% static 'images/poll/logo-morea.svg' %}" alt="Logo Morea">
+                </a>
+                <div class="mobile-menu">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+            <div class="nav-list">
+                <ul>
+                    <a class="link-navbar" href="{% url 'home' %}">
+                        <li>Início</li>
+                    </a>
+                    <a class="link-navbar" href="{% url 'candidates' %}">
+                        <li>Candidatos</li>
+                    </a>
+                    <a class="link-navbar" href="{% url 'results' %}">
+                        <li>Resultados</li>
+                    </a>
+                    {% if user.is_authenticated %}
+                    <a class="link-navbar" href="{% url 'menu' %}">
+                        <li>Menu</li>
+                    </a>
+                    <a class="link-navbar" href="{% url 'account-logout' %}">
+                        <li>Sair</li>
+                    </a>
+                    {% else %}
+                    <a class="link-navbar" href="{% url 'votacao' %}">
+                        <li>Votação</li>
+                    </a>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    {% block contend %}
+
+    {% endblock contend %}
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img class="footer-hat" src="{% static 'images/poll/chapeu.svg' %}" alt="chapéu">
+                <p class="footer-title">Rei e Rainha</p>
+                <br>
+                <p class="footer-title-2">RJ-45</p>
+            </div>
+            <div class="footer-realization">
+                <p class="footer-title-realization">Realization</p>
+                <div class="footer-image-realization">
+                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-morea.svg' %}"
+                        alt="Logo Morea">
+                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-coirc.svg' %}"
+                        alt="Logo Coirc">
+                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-ifs.png' %}"
+                        alt="Logo IFS">
+                </div>
+            </div>
+            <div class="footer-nav-list">
+                <ul>
+                    <a class="footer-link-navbar" href="{% url 'home' %}">
+                        <li>Início</li>
+                    </a>
+                    <a class="footer-link-navbar" href="{% url 'candidates' %}">
+                        <li>Candidatos</li>
+                    </a>
+                    <a class="footer-link-navbar" href="{% url 'results' %}">
+                        <li>Resultados</li>
+                    </a>    
+                    {% if user.is_authenticated %}
+                    <a class="footer-link-navbar" href="{% url 'menu' %}">
+                        <li>Menu</li>
+                    </a>
+                    <a class="footer-link-navbar" href="{% url 'account-logout' %}">
+                        <li>Sair</li>
+                    </a>
+                    {% else %}
+                    <a class="link-navbar" href="{% url 'votacao' %}">
+                        <li>Votação</li>
+                    </a>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <ul class="notifications"></ul>
+    <script src="{% static 'js/messages.js' %}"></script>
+    {% if messages %}
+    {% for message in messages %}
+        <script>
+            createToast("{{ message.tags }}", "{{ message }}");
+        </script>
+    {% endfor %}
+    {% endif %}
+</body>
+
+</html>

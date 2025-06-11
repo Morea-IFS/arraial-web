@@ -1,0 +1,119 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/globals.css' %}">
+    <link rel="stylesheet" href="{% static 'css/candidatos.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/poll/logo-morea.svg' %}">
+
+    <title>
+        Urna RJ45
+    </title>
+</head>
+
+<body>
+    <header>
+        <nav class="container-navbar">
+            <div class="logo-navbar">
+                <a href="/">
+                    <img class="logo" src="{% static 'images/poll/logo-morea.svg' %}" alt="Logo Morea">
+                </a>
+                <div class="mobile-menu">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+            <div class="nav-list">
+                <ul>
+                    <a class="link-navbar" href="">
+                        <li>{{aluno.nome}} em votação</li>
+                    </a>
+                    <a class="link-navbar" href="">
+                        {% if aluno.candidato == 0%}
+                        <li>Candidato <i style="color: red;" class="fa-solid fa-circle-xmark"></i></li>
+                        {% else %}
+                        <li>Candidato <i style="color: green;" class="fa-solid fa-circle-check"></i></li>
+                        {% endif %}
+                    </a>
+                    <a class="link-navbar" href="">
+                        {% if aluno.candidata == 0%}
+                        <li>Candidata <i style="color: red;" class="fa-solid fa-circle-xmark"></i></li>
+                        {% else %}
+                        <li>Candidata <i style="color: green;" class="fa-solid fa-circle-check"></i></li>
+                        {% endif %}
+                    </a>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="all">
+        <form class="form-inputs" method="post">
+            {% csrf_token %}
+            <p>Informe o número da sua candidata</p>
+            <input id="meuInput" name="number" type="number" placeholder="Número" required>
+            <button class="form-button-submit">
+                <p>VER CANDIDATA</p>
+            </button>
+        </form>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img class="footer-hat" src="{% static 'images/poll/chapeu.svg' %}" alt="chapéu">
+                <p class="footer-title">Rei e Rainha</p>
+                <br>
+                <p class="footer-title-2">RJ-45</p>
+            </div>
+            <div class="footer-realization">
+                <p class="footer-title-realization">Realization</p>
+                <div class="footer-image-realization">
+                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-morea.svg' %}"
+                        alt="Logo Morea">
+                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-coirc.svg' %}"
+                        alt="Logo Coirc">
+                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-ifs.png' %}"
+                        alt="Logo IFS">
+                </div>
+            </div>
+            <div class="footer-nav-list">
+                <ul>
+                    <a class="footer-link-navbar" href="">
+                        <li>{{aluno.nome}} em votação</li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <audio src="{% static 'audio/urna_eletronica.mp3' %}" autoplay>
+
+    </audio>
+    <audio id="meuAudio" src="{% static 'audio/click.mp3' %}">
+    </audio>
+    <script>
+        const input = document.getElementById('meuInput');
+        const audio = document.getElementById('meuAudio');
+
+        input.addEventListener('input', () => {
+        audio.currentTime = 0; // Reinicia o áudio
+        audio.play();
+        });
+    </script>
+    <ul class="notifications"></ul>
+    <script src="{% static 'js/messages.js' %}"></script>
+    {% if messages %}
+    {% for message in messages %}
+        <script>
+            createToast("{{ message.tags }}", "{{ message }}");
+        </script>
+    {% endfor %}
+    {% endif %}
+</body>
+
+</html>

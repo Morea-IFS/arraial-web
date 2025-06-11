@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+	Urna
+{% endblock title %}
+
+{% block contend %}
+<link rel="stylesheet" href="{% static 'css/votation.css' %}">
+    <main class="all">
+        <div>
+            <div class="div-title">
+                <img class="hat" src="{% static 'images/poll/chapeu.svg' %}" alt="chapeu">
+                <p class="title">Rei e Rainha</p>
+                <br>
+                <p class="title2">RJ-45</p>
+            </div>
+            <p class="text">
+                Informe a sua matrícula
+                <br>
+                para que possamos iniciar.
+            </p>
+            <img class="cactus" src="{% static 'images/poll/fogueira-e-cactos.svg' %}" alt="Fogueira e cactos">
+        </div>
+        <div class="couple">
+            <form class=" ag form-inputs" method="post">
+                {% csrf_token %}
+                <p>Informe a sua matrícula</p>
+                <input name="registration" type="number" placeholder="Matrícula">
+                <p>Informe o seu CPF</p>
+                <input name="cpf" type="number" placeholder="CPF">
+                <br>
+                <button class="form-button-submit">
+                    <p>IR VOTAR</p>
+                </button>
+            </form> 
+        </div>
+    </main>
+    {% if number == 1 %}
+        <audio src="{% static 'audio/urna_eletronica.mp3' %}">
+        </audio>
+    {% endif %}
+{% endblock contend %}
