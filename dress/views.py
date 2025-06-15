@@ -8,11 +8,12 @@ from .models import Dress, DressEffects
 def index(request):
     if request.method == 'POST':
         device_id = request.POST.get('deviceId')
-        effect = int(request.POST.get('effect', 0))  
+        effect = int(request.POST.get('effect', DressEffects.OFF))  
+        color = request.POST.get('color', '#FF0000')
         
         dress, created = Dress.objects.get_or_create(device_id=device_id)
         dress.effect = effect
-        dress.status = (effect != 0)  
+        dress.color = color
         dress.save()
         return redirect('dress_dashboard')
 
@@ -30,15 +31,15 @@ def getEffect(request, pk):
     try:
         dress = Dress.objects.get(device_id=pk)
         return JsonResponse({
-            'status': dress.effect, 
-            'status': dress.effect,
+            'effect': dress.effect,
+            'color': dress.color,
             'active': dress.status,
-            'debug': f"Efeito atual: {dress.effect} ({dress.get_effect_display()})"
+            'debug': f"Effect: {dress.get_effect_display()}, Color: {dress.color}"
         })
     except Dress.DoesNotExist:
-        dress = Dress.objects.create(device_id=pk)
+        dress = Dress.objects.create(device_id=pk, effect=DressEffects.OFF)  
         return JsonResponse({
-            'effect': 0,
-            'status': 0,
+            'effect': DressEffects.OFF,
+            'color': '#FF0000',
             'active': False
         })

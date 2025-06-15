@@ -1,16 +1,85 @@
-{% extends "dashboard/layout.html" %} {% load static %}
-
-<!--  -->
+{% extends "dashboard/layout.html" %}
+{% load static %}
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
 <title>Dashboard</title>
+<style>
+    .control-panel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 70vh;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .control-title {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        color: #2c3e50;
+        font-weight: 600;
+    }
+    
+    .control-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .control-btn {
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .control-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .led-btn {
+        background: linear-gradient(135deg, #4361ee, #3f37c9);
+        border: none;
+    }
+    
+    .detonator-btn {
+        background: linear-gradient(135deg, #f72585, #b5179e);
+        border: none;
+    }
+    
+    .btn-icon {
+        font-size: 1.3rem;
+    }
+</style>
 {% endblock head %}
 
-<!--  -->
-
 {% block content %}
-<main class="container mt-5">
-	<h1>Dashboard</h1>
+<main class="container">
+    <div class="control-panel">
+        <h1 class="control-title">Painel de Controle</h1>
+        
+        <div class="control-buttons">
+            <a href="/dress/dashboard" class="btn led-btn control-btn text-white">
+                <i class="bi bi-lightbulb btn-icon"></i>
+                Vestido LED
+            </a>
+            
+            <a href="/detonador/dashboard" class="btn detonator-btn control-btn text-white">
+                <i class="bi bi-megaphone btn-icon"></i>
+                Detonador
+            </a>
+        </div>
+    </div>
 </main>
 {% endblock content %}

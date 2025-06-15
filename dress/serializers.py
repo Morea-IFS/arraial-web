@@ -4,8 +4,9 @@ from .models import Dress
 class DressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dress
-        fields = ['effect', 'status']
+        fields = ['effect', 'color', 'status']
         extra_kwargs = {
             'effect': {'required': True},
+            'color': {'required': True},
             'status': {'required': True}
         }
