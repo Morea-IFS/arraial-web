@@ -5,8 +5,41 @@
 	Urna
 {% endblock title %}
 
+<body>
+    <header>
+        <nav class="container-navbar">
+            <div class="logo-navbar">
+                <a href="/">
+                    <img class="logo" src="{% static 'images/poll/logo-morea.svg' %}" alt="Logo Morea">
+                </a>
+                <div class="mobile-menu">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+            <div class="nav-list">
+                <ul>
+                    <a class="link-navbar" href="/">
+                        <li>Início</li>
+                    </a>
+                    <a class="link-navbar" href="/candidates">
+                        <li>Candidatos</li>
+                    </a>
+                    <a class="link-navbar" href="/result-pendent">
+                        <li>Resultados</li>
+                    </a>
+                    <a class="link-navbar" href="/dashboard/">
+                        <li>Dashboard</li>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
 {% block contend %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     <main class="all">
         <div>
             <div class="div-title">
