@@ -42,6 +42,9 @@
                     <a class="link-navbar" href="{% url 'results' %}">
                         <li>Resultados</li>
                     </a>
+                    <a class="link-navbar" href="/dashboard/">
+                        <li>Dashboard</li>
+                    </a>
                     {% if user.is_authenticated %}
                     <a class="link-navbar" href="{% url 'menu' %}">
                         <li>Menu</li>
