@@ -31,7 +31,7 @@ def login(request):
             loginAuth(request, user)
 
             try:
-                return redirect("/dashboard")
+                return redirect("/dashboard/")
             except:
                 return redirect('/')
         else:
