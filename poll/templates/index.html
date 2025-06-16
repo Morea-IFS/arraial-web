@@ -1,14 +1,9 @@
+{% extends 'layout.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="shortcut icon" href="{% static 'images/poll/logo-morea.svg' %}">
-    <title>Urna RJ45</title>
-</head>
+{% block title %}
+	Urna
+{% endblock title %}
 
 <body>
     <header>
@@ -41,6 +36,10 @@
             </div>
         </nav>
     </header>
+
+{% block contend %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     <main class="all">
         <div>
             <div class="div-title">
@@ -49,6 +48,15 @@
                 <br>
                 <p class="title2">RJ-45</p>
             </div>
+            {% if user.is_authenticated %}
+            <p class="text">
+                Cadastre os candidatos, assegure os
+                <br>
+                resultados e participe do concurso de Rei e
+                <br>
+                Rainha mais estimado Do IFS!
+            </p>
+            {% else %}
             <p class="text">
                 Conheça os candidatos, vote, acompanhe os
                 <br>
@@ -56,45 +64,9 @@
                 <br>
                 Rainha mais estimado Do IFS!
             </p>
+            {% endif %}
             <img class="cactus" src="{% static 'images/poll/fogueira-e-cactos.svg' %}" alt="Fogueira e cactos">
         </div>
         <img class="couple" src="{% static 'images/poll/casal.svg' %}" alt="casal">
     </main>
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img class="footer-hat" src="{% static 'images/poll/chapeu.svg' %}" alt="chapéu">
-                <p class="footer-title">Rei e Rainha</p>
-                <br>
-                <p class="footer-title-2">RJ-45</p>
-            </div>
-            <div class="footer-realization">
-                <p class="footer-title-realization">Realization</p>
-                <div class="footer-image-realization">
-                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-morea.svg' %}"
-                        alt="Logo Morea">
-                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-coirc.svg' %}"
-                        alt="Logo Coirc">
-                    <img class="footer-image-item-realization" src="{% static 'images/poll/logo-ifs.png' %}"
-                        alt="Logo IFS">
-                </div>
-            </div>
-            <div class="footer-nav-list">
-                <ul>
-                    <a class="footer-link-navbar" href="/">
-                        <li>Início</li>
-                    </a>
-                    <a class="footer-link-navbar" href="/candidates">
-                        <li>Candidatos</li>
-                    </a>
-                    <a class="footer-link-navbar" href="/result-pendent">
-                        <li>Resultados</li>
-                    </a>
-                </ul>
-            </div>
-        </div>
-    </footer>
-    <script src="{% static 'js/mobile-menu.js' %}"></script>
-</body>
-
-</html>
+{% endblock contend %}

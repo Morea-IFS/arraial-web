@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+	Resultados
+{% endblock title %}
+
+{% block contend %}
+<link rel="stylesheet" href="{% static 'css/register_candidates.css' %}">
+    <main>
+        <h1>REGISTROS DE ESTUDANTES</h1>
+        <form class="form-inputs" action="{% url 'register-student' %}" method="POST" class="form-login" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input name="name" type="text" placeholder="Nome">
+            <input name="registration" type="text" placeholder="Matrícula">
+            <select name="classroom" id="">
+                <option disabled selected value="3">Turma</option>
+                <option value="1">1º REDES</option>
+                <option value="2">2º REDES</option>
+                <option value="3">3º REDES</option>
+            </select>                  
+            <button type="submit">Cadastrar</button>
+        </form>
+    </main>
+{% endblock contend %}

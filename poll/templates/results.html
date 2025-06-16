@@ -1,157 +1,151 @@
+{% extends 'layout.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="{% static 'css/results.css' %}" />
-		<link rel="shortcut icon" href="{% static 'images/poll/logo-morea.svg' %}" />
-		<title>Resultados</title>
-	</head>
 
-	<body>
-		<header>
-			<nav class="container-navbar">
-				<div class="logo-navbar">
-					<a href="/">
-						<img
-							class="logo"
-							src="{% static 'images/poll/logo-morea.svg' %}"
-							alt="Logo Morea"
-						/>
-					</a>
-					<div class="mobile-menu">
-						<div class="line1"></div>
-						<div class="line2"></div>
-						<div class="line3"></div>
-					</div>
-				</div>
-				<div class="nav-list">
-					<ul>
-						<a class="link-navbar" href="/">
-							<li>Início</li>
-						</a>
-						<a class="link-navbar" href="/candidates">
-							<li>Candidatos</li>
-						</a>
-						<a class="link-navbar" href="/results">
-							<li>Resultados</li>
-						</a>
-					</ul>
-				</div>
-			</nav>
-		</header>
-		<main class="container">
-			<div class="candidate">
-				<div class="result">
-					<div class="bar">
-						<p class="result-title">Juvanete</p>
-						<p class="result-title">37%</p>
-						<div
-							class="king-progress-bar"
-							style="height: calc(37 * 1.8px)"
-						></div>
-					</div>
-					<div class="bar">
-						<p class="result-title result-winner result-winner-crown">
-							Juvanete
-						</p>
-						<p class="result-title result-winner">55%</p>
-						<div
-							class="king-progress-bar active"
-							style="height: calc(55 * 1.8px)"
-						></div>
-					</div>
-					<div class="bar">
-						<p class="result-title">Juvanete</p>
-						<p class="result-title">8%</p>
-						<div
-							class="king-progress-bar"
-							style="height: calc(8 * 1.8px)"
-						></div>
-					</div>
-				</div>
-				<p class="title">Rei</p>
-			</div>
-			<div class="candidate">
-				<div class="result">
-					<div class="bar">
-						<p class="result-title">Juvanete</p>
-						<p class="result-title">37%</p>
-						<div
-							class="king-progress-bar"
-							style="height: calc(37 * 1.8px)"
-						></div>
-					</div>
-					<div class="bar">
-						<p class="result-title result-winner result-winner-crown">
-							Juvanete
-						</p>
-						<p class="result-title result-winner">55%</p>
-						<div
-							class="king-progress-bar active"
-							style="height: calc(55 * 1.8px)"
-						></div>
-					</div>
-					<div class="bar">
-						<p class="result-title">Juvanete</p>
-						<p class="result-title">8%</p>
-						<div
-							class="king-progress-bar"
-							style="height: calc(8 * 1.8px)"
-						></div>
-					</div>
-				</div>
-				<p class="title">Rainha</p>
-			</div>
-		</main>
-		<footer>
-			<div class="footer-content">
-				<div class="footer-logo">
-					<img
-						class="footer-hat"
-						src="{% static 'images/poll/chapeu.svg' %}"
-						alt="chapéu"
-					/>
-					<p class="footer-title">Rei e Rainha</p>
-					<br />
-					<p class="footer-title-2">RJ-45</p>
-				</div>
-				<div class="footer-realization">
-					<p class="footer-title-realization">Realization</p>
-					<div class="footer-image-realization">
-						<img
-							class="footer-image-item-realization"
-							src="{% static 'images/poll/logo-morea.svg' %}"
-							alt="Logo Morea"
-						/>
-						<img
-							class="footer-image-item-realization"
-							src="{% static 'images/poll/logo-coirc.svg' %}"
-							alt="Logo Coirc"
-						/>
-						<img
-							class="footer-image-item-realization"
-							src="{% static 'images/poll/logo-ifs.png' %}"
-							alt="Logo IFS"
-						/>
-					</div>
-				</div>
-				<div class="footer-nav-list">
-					<ul>
-						<a class="footer-link-navbar" href="/">
-							<li>Início</li>
-						</a>
-						<a class="footer-link-navbar" href="/candidates">
-							<li>Candidatos</li>
-						</a>
-						<a class="footer-link-navbar" href="/result-pendent">
-							<li>Resultados</li>
-						</a>
-					</ul>
+{% block title %}
+	Resultados
+{% endblock title %}
+
+{% block contend %}
+<link rel="stylesheet" href="{% static 'css/results.css' %}">
+<main class="container">
+	<div class="candidate">
+		<div class="result">
+			<!--TOP 3-->
+			<div class="bar">
+				<p class="result-title">
+					{% if candidato_3.votos_do_candidato > 0 %}
+						{{ candidato_3.candidato }}
+					{% else %}
+						Candidato 3
+					{% endif %}
+				</p>
+				<p class="result-title">
+					{% if porcentanditato3 == 0 %}
+						0.0%
+					{% else %}
+						{{ porcentanditato3 }}%
+					{% endif %}
+					</p>
+				<div
+					class="king-progress-bar"
+					style="height: calc({{porcentanditato3}} * 1.8px)">
 				</div>
 			</div>
-		</footer>
-		<script src="{% static 'js/mobile-menu.js' %}"></script>
-	</body>
-</html>
+
+			<!--TOP 1-->
+			<div class="bar">
+				<p class="result-title result-winner result-winner-crown">
+					{% if candidato_1.votos_do_candidato > 0 %}
+						{{ candidato_1.candidato }}
+					{% else %}
+						Candidato 1
+					{% endif %}
+				</p>
+				<p class="result-title">
+					{% if porcentanditato1 == 0 %}
+						0.0%
+					{% else %}
+						{{ porcentanditato1 }}%
+					{% endif %}
+					</p>
+				<div
+					class="king-progress-bar active"
+					style="height: calc({{porcentanditato1}} * 1.8px)"
+				></div>
+			</div>
+
+			<!--TOP 2-->
+			<div class="bar">
+				<p class="result-title">
+					{% if candidato_2.votos_do_candidato > 0 %}
+						{{ candidato_2.candidato }}
+					{% else %}
+						Candidato 2
+					{% endif %}
+				</p>
+				<p class="result-title">
+					{% if porcentanditato2 == 0 %}
+						0.0%
+					{% else %}
+						{{ porcentanditato2 }}%
+					{% endif %}
+					</p>
+				<div
+					class="king-progress-bar"
+					style="height: calc({{porcentanditato2}} * 1.8px)"
+				></div>
+			</div>
+		</div>
+		<p class="title">Rei</p>
+	</div>
+	<div class="candidate">
+		<div class="result">
+			<!--TOP 3-->
+			<div class="bar">
+				<p class="result-title">
+					{% if candidata_3.votos_da_candidata > 0 %}
+						{{ candidata_3.candidata }}
+					{% else %}
+						Candidata 3
+					{% endif %}
+				</p>
+				<p class="result-title">
+					{% if porcentanditata3 == 0 %}
+						0.0%
+					{% else %}
+						{{ porcentanditata3 }}%
+					{% endif %}
+					</p>
+				<div
+					class="king-progress-bar"
+					style="height: calc({{porcentanditata3}} * 1.8px)"
+				></div>
+			</div>
+			<!--TOP 1-->
+			<div class="bar">
+				<p class="result-title result-winner result-winner-crown">
+					{% if candidata_1.votos_da_candidata > 0 %}
+						{{ candidata_1.candidata }}
+					{% else %}
+						Candidata 1
+					{% endif %}
+				</p>
+				<p class="result-title">
+					{% if porcentanditata1 == 0 %}
+						0.0%
+					{% else %}
+						{{ porcentanditata1 }}%
+					{% endif %}
+					</p>
+				<div
+					class="king-progress-bar active"
+					style="height: calc({{porcentanditata1}} * 1.8px)"
+				></div>
+			</div>
+			<!--TOP 2-->
+			<div class="bar">
+				<p class="result-title">
+					{% if candidata_2.votos_da_candidata > 0 %}
+						{{ candidata_2.candidata }}
+					{% else %}
+						Candidata 2
+					{% endif %}
+				</p>
+				<p class="result-title">
+					{% if porcentanditata2 == 0 %}
+						0.0%
+					{% else %}
+						{{ porcentanditata2 }}%
+					{% endif %}
+					</p>
+				<div
+					class="king-progress-bar"
+					style="height: calc({{porcentanditata2}} * 1.8px)"
+				></div>
+			</div>
+		</div>
+		<p class="title">Rainha</p>
+	</div>
+</main>
+    <div class="invisible-footeer"></div>
+{% endblock contend %}

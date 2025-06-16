@@ -31,50 +31,6 @@ a {
     text-decoration: none;
 }
 
-.container-navbar {
-    display: flex;
-    z-index: 1;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: auto;
-    position: fixed;
-    border-bottom: solid 2px black;
-    background-color: #d1d1b3;
-    top: 0;
-}
-
-.navbar {
-    display: flex;
-    padding: 30px;
-}
-
-.nav-list {
-    display: flex;
-    padding-right: 70px;
-}
-
-.nav-list ul {
-    display: flex;
-    list-style: none;
-    font-family: 'well';
-    font-size: 20px;
-    gap: 33px;
-}
-
-.logo-navbar {
-    display: flex;
-    margin-inline: 3%;
-}
-
-.logo {
-    width: 75px;
-    height: 75px;
-}
-
-.link-navbar {
-    color: black;
-}
 
 
 /*Área de resultados*/

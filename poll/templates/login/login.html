@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+	LOGIN
+{% endblock title %}
+
+{% block contend %}
+<link rel="stylesheet" href="{% static 'css/layout/base.css' %}">
+<link rel="stylesheet" href="{% static 'css/layout/login.css' %}">
+<main>
+    <div class="contend">
+        <div class="div2">
+            <div class="login-area">
+                <h1>LOGIN</h1>
+                <form action="{% url 'account-login' %}" method="POST" class="form-login">
+                    {% csrf_token %}
+                    <br><br>
+                    <input class="input-form" name="username" type="text" placeholder="Username">
+                    <br><br>
+                    <input class="input-form" name="password" type="password" placeholder="Password">
+                    <br><br>
+                    <button class="form-button-submit" type="submit"><p>play</p></button>
+                    <br><br>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock contend %}
