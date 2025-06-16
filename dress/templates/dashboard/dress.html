@@ -1,27 +1,172 @@
 {% extends "dashboard/layout.html" %}
 
 {% block head %}
-<title>Vestidos | Gerenciamento</title>
+<title>LED | Gerenciamento</title>
 <style>
-    .effect-option {
-        transition: all 0.3s ease;
+    :root {
+        --primary: #4361ee;
+        --primary-dark: #3a56d4;
+        --secondary: #3f37c9;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --card-bg: #ffffff;
+        --success: #4cc9f0;
     }
-    .effect-option:hover {
+    
+    .gradient-bg {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+    
+    .effect-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--card-bg);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .effect-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(67, 97, 238, 0.15);
+    }
+    
+    .effect-active {
+        border: 2px solid var(--primary);
+        background-color: rgba(67, 97, 238, 0.05);
+        position: relative;
+    }
+    
+    .effect-active::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--primary);
+    }
+    
+    .color-picker-wrapper {
+        position: relative;
+        width: 100%;
+    }
+    
+    .color-preview {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: inline-block;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .color-preview:hover {
         transform: scale(1.05);
     }
-    .effect-active {
-        background-color: #e9f7fe;
-        border-left: 4px solid #0d6efd;
+    
+    .color-presets {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+    }
+    
+    .color-preset {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.2s;
+        border: 2px solid white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .color-preset:hover {
+        transform: scale(1.15);
+    }
+    
+    .color-value {
+        font-family: monospace;
+        background: rgba(0,0,0,0.05);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9rem;
+    }
+    
+    .device-card {
+        transition: all 0.3s ease;
+        border-radius: 12px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    
+    .device-card:hover {
+        box-shadow: 0 8px 24px rgba(67, 97, 238, 0.1);
+    }
+    
+    .status-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px;
+    }
+    
+    .status-active {
+        background: var(--success);
+        box-shadow: 0 0 8px rgba(76, 201, 240, 0.6);
+    }
+    
+    .status-inactive {
+        background: #adb5bd;
+    }
+    
+    .btn-apply {
+        background: var(--primary);
+        border: none;
+        padding: 10px 16px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        transition: all 0.3s;
+    }
+    
+    .btn-apply:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+    }
+    
+    /* Custom color picker button */
+    .custom-color-input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    
+    .color-input-label {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
     }
 </style>
-{% endblock head %}
+{% endblock %}
 
 {% block content %}
-<main class="container mt-4">
+<main class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="mb-0">Gerenciamento de Vestidos</h1>
+        <div>
+            <h1 class="h3 mb-1 fw-bold">Controle de Iluminação LED</h1>
+            <p class="text-muted mb-0">Gerencie os efeitos e cores dos seus dispositivos</p>
+        </div>
         <a href="{% url 'admin:dress_dress_add' %}" class="btn btn-success">
-            <i class="bi bi-plus-circle"></i> Adicionar Vestido
+            <i class="bi bi-plus-lg me-2"></i>Novo Dispositivo
         </a>
     </div>
 
@@ -29,6 +174,7 @@
     <div class="mb-4">
         {% for message in messages %}
         <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <i class="bi {% if message.tags == 'success' %}bi-check-circle-fill{% else %}bi-exclamation-triangle-fill{% endif %} me-2"></i>
             {{ message }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -36,56 +182,158 @@
     </div>
     {% endif %}
 
-    <div class="row">
+    <div class="row g-4">
         {% for dress in dressData %}
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">{{ dress.device.deviceName }}</h5>
-                    <span class="badge bg-{% if dress.status %}success{% else %}secondary{% endif %}">
-                        {% if dress.status %}Ativo{% else %}Inativo{% endif %}
-                    </span>
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 device-card">
+                <div class="card-header gradient-bg text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <span class="status-indicator {% if dress.status %}status-active{% else %}status-inactive{% endif %}"></span>
+                            {{ dress.device.deviceName }}
+                        </h5>
+                        <span class="badge bg-light text-dark">
+                            {{ dress.get_effect_display }}
+                        </span>
+                    </div>
                 </div>
+                
                 <div class="card-body">
-                    <form method="post" class="d-flex flex-column h-100">
+                    <form method="post" class="h-100 d-flex flex-column">
                         {% csrf_token %}
                         <input type="hidden" name="deviceId" value="{{ dress.device.id }}">
                         
-                        <div class="mb-3">
-                            <h6 class="mb-3">Efeitos Disponíveis:</h6>
-                            <div class="list-group">
+                        <div class="mb-4">
+                            <label class="form-label fw-bold mb-3">Cor Principal</label>
+                            <div class="color-picker-wrapper">
+                                <div class="color-input-label">
+                                    <div class="color-preview" style="background-color: {{ dress.color|default:'#FF0000' }};"></div>
+                                    <span class="color-value">{{ dress.color|default:"#FF0000" }}</span>
+                                    <input type="color" 
+                                           class="custom-color-input" 
+                                           name="color"
+                                           value="{{ dress.color|default:'#FF0000' }}"
+                                           id="color-{{ dress.device.id }}">
+                                </div>
+                                
+                                <div class="color-presets">
+                                    <div class="color-preset" style="background-color: #FF0000;" data-color="#FF0000"></div>
+                                    <div class="color-preset" style="background-color: #00FF00;" data-color="#00FF00"></div>
+                                    <div class="color-preset" style="background-color: #0000FF;" data-color="#0000FF"></div>
+                                    <div class="color-preset" style="background-color: #FFFF00;" data-color="#FFFF00"></div>
+                                    <div class="color-preset" style="background-color: #FF00FF;" data-color="#FF00FF"></div>
+                                    <div class="color-preset" style="background-color: #00FFFF;" data-color="#00FFFF"></div>
+                                    <div class="color-preset" style="background-color: #FFA500;" data-color="#FFA500"></div>
+                                    <div class="color-preset" style="background-color: #FFFFFF;" data-color="#FFFFFF"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4 flex-grow-1">
+                            <label class="form-label fw-bold mb-3">Efeitos Disponíveis</label>
+                            <div class="row g-3">
                                 {% for effect in dressEffects %}
-                                <label class="list-group-item effect-option {% if dress.effect == effect.0 %}effect-active{% endif %}">
-                                    <input class="form-check-input me-2" 
-                                           type="radio" 
-                                           name="effect" 
-                                           value="{{ effect.0 }}"
-                                           {% if dress.effect == effect.0 %}checked{% endif %}>
-                                    {{ effect.1 }}
-                                </label>
+                                <div class="col-6">
+                                    <div class="effect-card h-100 {% if dress.effect == effect.0 %}effect-active{% endif %}" 
+                                         onclick="selectEffect('effect-{{ effect.0 }}-{{ dress.device.id }}')">
+                                        <div class="card-body text-center p-3">
+                                            <input type="radio" 
+                                                   class="form-check-input visually-hidden" 
+                                                   id="effect-{{ effect.0 }}-{{ dress.device.id }}"
+                                                   name="effect" 
+                                                   value="{{ effect.0 }}"
+                                                   {% if dress.effect == effect.0 %}checked{% endif %}>
+                                            <label class="form-check-label d-block" for="effect-{{ effect.0 }}-{{ dress.device.id }}">
+                                                <div class="mb-2">
+                                                    <i class="bi display-6 
+                                                        {% if effect.0 == 0 %}bi-power
+                                                        {% elif effect.0 == 1 %}bi-palette
+                                                        {% elif effect.0 == 2 %}bi-lightning-charge
+                                                        {% elif effect.0 == 3 %}bi-arrow-repeat
+                                                        {% elif effect.0 == 4 %}bi-rainbow
+                                                        {% elif effect.0 == 5 %}bi-fire
+                                                        {% elif effect.0 == 6 %}bi-magic
+                                                        {% else %}bi-lightbulb{% endif %}"></i>
+                                                </div>
+                                                {{ effect.1 }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                                 {% endfor %}
                             </div>
                         </div>
                         
-                        <div class="mt-auto d-grid">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-save"></i> Salvar Configuração
-                            </button>
-                        </div>
+                        <button type="submit" class="btn btn-apply text-white w-100 mt-auto py-2">
+                            <i class="bi bi-save me-2"></i>Aplicar Configurações
+                        </button>
                     </form>
                 </div>
-                <div class="card-footer text-muted small">
-                    Última atualização: {{ dress.device.updated_at|date:"d/m/Y H:i" }}
+                
+                <div class="card-footer bg-transparent border-top">
+                    <small class="text-muted">
+                        <i class="bi bi-clock-history me-1"></i>
+                        Atualizado em {{ dress.device.updated_at|date:"d/m/Y H:i" }}
+                    </small>
                 </div>
             </div>
         </div>
         {% empty %}
         <div class="col-12">
-            <div class="alert alert-info">
-                Nenhum vestido cadastrado. <a href="{% url 'admin:dress_dress_add' %}">Adicione um vestido</a> para começar.
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-lightbulb-off display-4 text-muted mb-3"></i>
+                    <h5 class="text-muted">Nenhum dispositivo encontrado</h5>
+                    <p class="text-muted mb-4">Adicione seu primeiro dispositivo para começar</p>
+                    <a href="{% url 'admin:dress_dress_add' %}" class="btn btn-primary">
+                        <i class="bi bi-plus-lg me-2"></i>Adicionar Dispositivo
+                    </a>
+                </div>
             </div>
         </div>
         {% endfor %}
     </div>
 </main>
-{% endblock content %}
+
+<script>
+    document.querySelectorAll('input[type="color"]').forEach(input => {
+        input.addEventListener('input', function() {
+            const preview = this.closest('.color-input-label').querySelector('.color-preview');
+            const valueDisplay = this.closest('.color-input-label').querySelector('.color-value');
+            preview.style.backgroundColor = this.value;
+            valueDisplay.textContent = this.value;
+        });
+    });
+    
+    document.querySelectorAll('.color-preset').forEach(preset => {
+        preset.addEventListener('click', function() {
+            const color = this.getAttribute('data-color');
+            const card = this.closest('.device-card');
+            const colorInput = card.querySelector('input[type="color"]');
+            const preview = card.querySelector('.color-preview');
+            const valueDisplay = card.querySelector('.color-value');
+            
+            colorInput.value = color;
+            preview.style.backgroundColor = color;
+            valueDisplay.textContent = color;
+        });
+    });
+
+    function selectEffect(id) {
+        const radio = document.getElementById(id);
+        radio.checked = true;
+
+        const card = radio.closest('.effect-card');
+        card.closest('.row').querySelectorAll('.effect-card').forEach(c => {
+            c.classList.remove('effect-active');
+        });
+        card.classList.add('effect-active');
+    }
+
+    document.querySelectorAll('.color-preview').forEach(preview => {
+        preview.addEventListener('click', function() {
+            this.closest('.color-input-label').querySelector('input[type="color"]').click();
+        });
+    });
+</script>
+{% endblock %}
