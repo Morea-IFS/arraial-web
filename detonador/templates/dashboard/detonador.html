@@ -1,67 +1,190 @@
 {% extends "dashboard/layout.html" %}
 
-<!--  -->
-
 {% block head %}
-<title>Vestidos | Gerenciamento</title>
-{% endblock head %}
-<!--  -->
-{% block content %}
-<main class="container mt-5">
-	<h1>Detonador</h1>
-	{% regroup detonadorData by device.id as filteredDetonador %}
-	<!--  -->
-	{% for detonador in filteredDetonador %}
-	<div class="card mt-3 mb-2">
-		<div class="card-header">{{detonador.list.0.device.name}}</div>
-		<div class="card-body">
-			<form method="post" class="d-flex flex-column" id="form">
-				{% csrf_token %}
-				<input
-					class="visually-hidden"
-					value="{{detonador.list.0.device.id}}"
-					name="deviceId"
-					type="text"
-				/>
-				<div class="d-flex">
-					{% for det in detonador.list %}
-					<!--  -->
-					{% if det.status %}
-					<div class="form-check px-4 py-2">
-						<input
-							name="{{det.id}}"
-							type="checkbox"
-							class="form-check-input"
-							id="{{det.id}}"
-							checked
-						/>
-						<label class="form-check-label" for="{{det.id}}"
-							>D{{det.pin}}</label
-						>
-					</div>
-					{% else %}
+<title>Detonador | Gerenciamento</title>
+<style>
+    :root {
+        --primary: #4361ee;
+        --primary-dark: #3a56d4;
+        --secondary: #3f37c9;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --card-bg: #ffffff;
+        --success: #4cc9f0;
+    }
+    
+    .gradient-bg {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+    
+    .device-card {
+        transition: all 0.3s ease;
+        border-radius: 12px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .device-card:hover {
+        box-shadow: 0 8px 24px rgba(67, 97, 238, 0.1);
+    }
+    
+    .status-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px;
+    }
+    
+    .status-active {
+        background: var(--success);
+        box-shadow: 0 0 8px rgba(76, 201, 240, 0.6);
+    }
+    
+    .status-inactive {
+        background: #adb5bd;
+    }
+    
+    .btn-apply {
+        background: var(--primary);
+        border: none;
+        padding: 10px 16px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        transition: all 0.3s;
+    }
+    
+    .btn-apply:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+    }
+    
+    .detonador-pin {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        margin: 8px;
+        background-color: #f8f9fa;
+        transition: all 0.2s;
+        border: 2px solid #e9ecef;
+    }
+    
+    .detonador-pin:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .detonador-pin.active {
+        background-color: #4361ee;
+        color: white;
+        border-color: #3a56d4;
+    }
+    
+    .detonador-pin input {
+        position: absolute;
+        opacity: 0;
+    }
+    
+    .detonador-pin label {
+        cursor: pointer;
+        font-weight: 600;
+        margin: 0;
+    }
+</style>
+{% endblock %}
 
-					<div class="form-check px-4 py-2">
-						<input
-							name="{{det.id}}"
-							type="checkbox"
-							class="form-check-input"
-							id="{{det.id}}"
-						/>
-						<label class="form-check-label" for="{{det.id}}"
-							>D{{det.pin}}</label
-						>
-					</div>
-					{% endif %}
-					<!--  -->
-					{% endfor %}
-				</div>
-				<button type="submit" class="btn btn-primary px-4 align-self-center">
-					Salvar
-				</button>
-			</form>
-		</div>
-	</div>
-	{% endfor %}
+{% block content %}
+<main class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-1 fw-bold">Controle dos Detonadores</h1>
+            <p class="text-muted mb-0">Gerencie os pinos dos Detonadores</p>
+        </div>
+    </div>
+
+    {% if messages %}
+    <div class="mb-4">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <i class="bi {% if message.tags == 'success' %}bi-check-circle-fill{% else %}bi-exclamation-triangle-fill{% endif %} me-2"></i>
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% regroup detonadorData by device.id as filteredDetonador %}
+    {% for detonador in filteredDetonador %}
+    <div class="card device-card mb-4">
+        <div class="card-header gradient-bg text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <span class="status-indicator status-active"></span>
+                    {{ detonador.list.0.device.name }}
+                </h5>
+            </div>
+        </div>
+        
+        <div class="card-body">
+            <form method="post" id="form">
+                {% csrf_token %}
+                <input type="hidden" value="{{ detonador.list.0.device.id }}" name="deviceId">
+                
+                <div class="d-flex flex-wrap justify-content-center">
+                    {% for det in detonador.list %}
+                    <div class="detonador-pin {% if det.status %}active{% endif %}">
+                        <input type="checkbox" 
+                               name="{{ det.id }}" 
+                               id="pin-{{ det.id }}" 
+                               {% if det.status %}checked{% endif %}>
+                        <label for="pin-{{ det.id }}">D{{ det.pin }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-apply text-white px-4">
+                        <i class="bi bi-save me-2"></i>Salvar Configurações
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="card-footer bg-transparent border-top">
+            <small class="text-muted">
+                <i class="bi bi-gear me-1"></i>
+                Total de {{ detonador.list|length }} pinos configuráveis
+            </small>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body text-center py-5">
+                <i class="bi bi-plug display-4 text-muted mb-3"></i>
+                <h5 class="text-muted">Nenhum dispositivo encontrado</h5>
+                <p class="text-muted mb-4">Configure seu primeiro dispositivo para começar</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </main>
-{% endblock content %}
+
+<script>
+    document.querySelectorAll('.detonador-pin').forEach(pin => {
+        pin.addEventListener('click', function() {
+            const checkbox = this.querySelector('input');
+            checkbox.checked = !checkbox.checked;
+            this.classList.toggle('active', checkbox.checked);
+        });
+    });
+</script>
+{% endblock %}
